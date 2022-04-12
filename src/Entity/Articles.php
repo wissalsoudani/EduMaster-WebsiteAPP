@@ -56,5 +56,70 @@ class Articles
      */
     private $contenu;
 
+    public function getIdArticles(): ?int
+    {
+        return $this->idArticles;
+    }
+
+    public function getDateArticle(): ?string
+    {
+        return $this->dateArticle;
+    }
+
+    public function setDateArticle(string $dateArticle): self
+    {
+        $this->dateArticle = $dateArticle;
+
+        return $this;
+    }
+
+    public function getNombreLike(): ?int
+    {
+        return $this->nombreLike;
+    }
+
+    public function setNombreLike(int $nombreLike): self
+    {
+        $this->nombreLike = $nombreLike;
+
+        return $this;
+    }
+
+    public function getNombreCommentaire(): ?int
+    {
+        return $this->nombreCommentaire;
+    }
+
+    public function setNombreCommentaire(int $nombreCommentaire): self
+    {
+        $this->nombreCommentaire = $nombreCommentaire;
+
+        return $this;
+    }
+
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+
+    public function setTitre(string $titre): self
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    public function getContenu(): ?string
+    {
+        return $this->contenu;
+    }
+
+    public function setContenu(string $contenu): self
+    {
+        $this->contenu = $contenu;
+
+        return $this;
+    }
+
 
 }

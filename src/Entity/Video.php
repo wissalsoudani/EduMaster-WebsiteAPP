@@ -49,5 +49,58 @@ class Video
      */
     private $dureeVideo;
 
+    public function getIdVideo(): ?int
+    {
+        return $this->idVideo;
+    }
+
+    public function getNomVideo(): ?string
+    {
+        return $this->nomVideo;
+    }
+
+    public function setNomVideo(string $nomVideo): self
+    {
+        $this->nomVideo = $nomVideo;
+
+        return $this;
+    }
+
+    public function getDate(): ?string
+    {
+        return $this->date;
+    }
+
+    public function setDate(?string $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getDureeVideo(): ?string
+    {
+        return $this->dureeVideo;
+    }
+
+    public function setDureeVideo(string $dureeVideo): self
+    {
+        $this->dureeVideo = $dureeVideo;
+
+        return $this;
+    }
+
 
 }

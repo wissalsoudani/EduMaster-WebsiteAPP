@@ -63,5 +63,82 @@ class Reglement
      */
     private $echeance;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getClient(): ?string
+    {
+        return $this->client;
+    }
+
+    public function setClient(string $client): self
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    public function getFacture(): ?string
+    {
+        return $this->facture;
+    }
+
+    public function setFacture(string $facture): self
+    {
+        $this->facture = $facture;
+
+        return $this;
+    }
+
+    public function getModereg(): ?string
+    {
+        return $this->modereg;
+    }
+
+    public function setModereg(string $modereg): self
+    {
+        $this->modereg = $modereg;
+
+        return $this;
+    }
+
+    public function getMontant(): ?string
+    {
+        return $this->montant;
+    }
+
+    public function setMontant(string $montant): self
+    {
+        $this->montant = $montant;
+
+        return $this;
+    }
+
+    public function getNumpiece(): ?string
+    {
+        return $this->numpiece;
+    }
+
+    public function setNumpiece(string $numpiece): self
+    {
+        $this->numpiece = $numpiece;
+
+        return $this;
+    }
+
+    public function getEcheance(): ?string
+    {
+        return $this->echeance;
+    }
+
+    public function setEcheance(string $echeance): self
+    {
+        $this->echeance = $echeance;
+
+        return $this;
+    }
+
 
 }

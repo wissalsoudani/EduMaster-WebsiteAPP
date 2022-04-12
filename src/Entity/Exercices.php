@@ -21,5 +21,10 @@ class Exercices
      */
     private $idExercices;
 
+    public function getIdExercices(): ?int
+    {
+        return $this->idExercices;
+    }
+
 
 }

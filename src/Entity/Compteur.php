@@ -35,5 +35,34 @@ class Compteur
      */
     private $numl;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getNumcom(): ?int
+    {
+        return $this->numcom;
+    }
+
+    public function setNumcom(int $numcom): self
+    {
+        $this->numcom = $numcom;
+
+        return $this;
+    }
+
+    public function getNuml(): ?string
+    {
+        return $this->numl;
+    }
+
+    public function setNuml(string $numl): self
+    {
+        $this->numl = $numl;
+
+        return $this;
+    }
+
 
 }

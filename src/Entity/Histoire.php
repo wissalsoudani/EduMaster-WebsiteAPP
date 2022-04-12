@@ -63,5 +63,82 @@ class Histoire
      */
     private $catégorie;
 
+    public function getIdHistoire(): ?int
+    {
+        return $this->idHistoire;
+    }
+
+    public function getAge(): ?int
+    {
+        return $this->age;
+    }
+
+    public function setAge(int $age): self
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
+    public function getLangue(): ?string
+    {
+        return $this->langue;
+    }
+
+    public function setLangue(string $langue): self
+    {
+        $this->langue = $langue;
+
+        return $this;
+    }
+
+    public function getNomHistoire(): ?string
+    {
+        return $this->nomHistoire;
+    }
+
+    public function setNomHistoire(string $nomHistoire): self
+    {
+        $this->nomHistoire = $nomHistoire;
+
+        return $this;
+    }
+
+    public function getContenuHistoire(): ?string
+    {
+        return $this->contenuHistoire;
+    }
+
+    public function setContenuHistoire(string $contenuHistoire): self
+    {
+        $this->contenuHistoire = $contenuHistoire;
+
+        return $this;
+    }
+
+    public function getCouvertureHistoire(): ?string
+    {
+        return $this->couvertureHistoire;
+    }
+
+    public function setCouvertureHistoire(string $couvertureHistoire): self
+    {
+        $this->couvertureHistoire = $couvertureHistoire;
+
+        return $this;
+    }
+
+    public function getCatégorie(): ?string
+    {
+        return $this->catégorie;
+    }
+
+    public function setCatégorie(string $catégorie): self
+    {
+        $this->catégorie = $catégorie;
+
+        return $this;
+    }
+
 
 }

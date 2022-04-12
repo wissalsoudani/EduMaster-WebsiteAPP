@@ -59,5 +59,70 @@ class ResultatTestHistoire
      */
     private $idTest;
 
+    public function getIdResultat(): ?int
+    {
+        return $this->idResultat;
+    }
+
+    public function getIdUser(): ?int
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(int $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    public function getScore(): ?int
+    {
+        return $this->score;
+    }
+
+    public function setScore(int $score): self
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getLigneHistoire(): ?int
+    {
+        return $this->ligneHistoire;
+    }
+
+    public function setLigneHistoire(int $ligneHistoire): self
+    {
+        $this->ligneHistoire = $ligneHistoire;
+
+        return $this;
+    }
+
+    public function getIdTest(): ?TestHistoire
+    {
+        return $this->idTest;
+    }
+
+    public function setIdTest(?TestHistoire $idTest): self
+    {
+        $this->idTest = $idTest;
+
+        return $this;
+    }
+
 
 }

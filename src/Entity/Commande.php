@@ -70,5 +70,94 @@ class Commande
      */
     private $totttc;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getNumc(): ?string
+    {
+        return $this->numc;
+    }
+
+    public function setNumc(string $numc): self
+    {
+        $this->numc = $numc;
+
+        return $this;
+    }
+
+    public function getClient(): ?string
+    {
+        return $this->client;
+    }
+
+    public function setClient(string $client): self
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    public function getDatecomm(): ?\DateTimeInterface
+    {
+        return $this->datecomm;
+    }
+
+    public function setDatecomm(\DateTimeInterface $datecomm): self
+    {
+        $this->datecomm = $datecomm;
+
+        return $this;
+    }
+
+    public function getObservation(): ?string
+    {
+        return $this->observation;
+    }
+
+    public function setObservation(string $observation): self
+    {
+        $this->observation = $observation;
+
+        return $this;
+    }
+
+    public function getTotht(): ?string
+    {
+        return $this->totht;
+    }
+
+    public function setTotht(string $totht): self
+    {
+        $this->totht = $totht;
+
+        return $this;
+    }
+
+    public function getTottva(): ?string
+    {
+        return $this->tottva;
+    }
+
+    public function setTottva(string $tottva): self
+    {
+        $this->tottva = $tottva;
+
+        return $this;
+    }
+
+    public function getTotttc(): ?string
+    {
+        return $this->totttc;
+    }
+
+    public function setTotttc(string $totttc): self
+    {
+        $this->totttc = $totttc;
+
+        return $this;
+    }
+
 
 }

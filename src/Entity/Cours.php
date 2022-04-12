@@ -49,5 +49,58 @@ class Cours
      */
     private $nbChapitres;
 
+    public function getIdCours(): ?int
+    {
+        return $this->idCours;
+    }
+
+    public function getNomCours(): ?string
+    {
+        return $this->nomCours;
+    }
+
+    public function setNomCours(string $nomCours): self
+    {
+        $this->nomCours = $nomCours;
+
+        return $this;
+    }
+
+    public function getContenuCours(): ?string
+    {
+        return $this->contenuCours;
+    }
+
+    public function setContenuCours(string $contenuCours): self
+    {
+        $this->contenuCours = $contenuCours;
+
+        return $this;
+    }
+
+    public function getNbPages(): ?int
+    {
+        return $this->nbPages;
+    }
+
+    public function setNbPages(int $nbPages): self
+    {
+        $this->nbPages = $nbPages;
+
+        return $this;
+    }
+
+    public function getNbChapitres(): ?int
+    {
+        return $this->nbChapitres;
+    }
+
+    public function setNbChapitres(int $nbChapitres): self
+    {
+        $this->nbChapitres = $nbChapitres;
+
+        return $this;
+    }
+
 
 }

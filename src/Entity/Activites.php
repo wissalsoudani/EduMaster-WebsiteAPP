@@ -70,5 +70,94 @@ class Activites
      */
     private $lieu;
 
+    public function getIdActivites(): ?int
+    {
+        return $this->idActivites;
+    }
+
+    public function getDateActivite(): ?string
+    {
+        return $this->dateActivite;
+    }
+
+    public function setDateActivite(string $dateActivite): self
+    {
+        $this->dateActivite = $dateActivite;
+
+        return $this;
+    }
+
+    public function getPrixActivite(): ?float
+    {
+        return $this->prixActivite;
+    }
+
+    public function setPrixActivite(float $prixActivite): self
+    {
+        $this->prixActivite = $prixActivite;
+
+        return $this;
+    }
+
+    public function getTypeActivite(): ?string
+    {
+        return $this->typeActivite;
+    }
+
+    public function setTypeActivite(string $typeActivite): self
+    {
+        $this->typeActivite = $typeActivite;
+
+        return $this;
+    }
+
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+
+    public function setTitre(string $titre): self
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getLieu(): ?string
+    {
+        return $this->lieu;
+    }
+
+    public function setLieu(string $lieu): self
+    {
+        $this->lieu = $lieu;
+
+        return $this;
+    }
+
 
 }

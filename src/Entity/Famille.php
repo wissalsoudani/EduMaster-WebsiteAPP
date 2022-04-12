@@ -35,5 +35,34 @@ class Famille
      */
     private $produits;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getLibelle(): ?string
+    {
+        return $this->libelle;
+    }
+
+    public function setLibelle(string $libelle): self
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    public function getProduits(): ?string
+    {
+        return $this->produits;
+    }
+
+    public function setProduits(string $produits): self
+    {
+        $this->produits = $produits;
+
+        return $this;
+    }
+
 
 }

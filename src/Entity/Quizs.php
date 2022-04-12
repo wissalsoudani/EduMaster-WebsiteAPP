@@ -49,5 +49,58 @@ class Quizs
      */
     private $resultat;
 
+    public function getIdQuizs(): ?int
+    {
+        return $this->idQuizs;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getMatiere(): ?string
+    {
+        return $this->matiere;
+    }
+
+    public function setMatiere(string $matiere): self
+    {
+        $this->matiere = $matiere;
+
+        return $this;
+    }
+
+    public function getDifficulte(): ?string
+    {
+        return $this->difficulte;
+    }
+
+    public function setDifficulte(string $difficulte): self
+    {
+        $this->difficulte = $difficulte;
+
+        return $this;
+    }
+
+    public function getResultat(): ?int
+    {
+        return $this->resultat;
+    }
+
+    public function setResultat(int $resultat): self
+    {
+        $this->resultat = $resultat;
+
+        return $this;
+    }
+
 
 }

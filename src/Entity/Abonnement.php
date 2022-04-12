@@ -35,5 +35,34 @@ class Abonnement
      */
     private $type;
 
+    public function getIdAbonnement(): ?int
+    {
+        return $this->idAbonnement;
+    }
+
+    public function getLoginUser(): ?string
+    {
+        return $this->loginUser;
+    }
+
+    public function setLoginUser(string $loginUser): self
+    {
+        $this->loginUser = $loginUser;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
 
 }
