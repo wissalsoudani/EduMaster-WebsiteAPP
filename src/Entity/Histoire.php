@@ -61,7 +61,7 @@ class Histoire
      *
      * @ORM\Column(name="catégorie", type="string", length=255, nullable=false)
      */
-    private $catégorie;
+    private $categorie;
 
     public function getIdHistoire(): ?int
     {
@@ -128,14 +128,14 @@ class Histoire
         return $this;
     }
 
-    public function getCatégorie(): ?string
+    public function getCategorie(): ?string
     {
-        return $this->catégorie;
+        return $this->categorie;
     }
 
-    public function setCatégorie(string $catégorie): self
+    public function setCategorie(string $categorie): self
     {
-        $this->catégorie = $catégorie;
+        $this->categorie = $categorie;
 
         return $this;
     }
