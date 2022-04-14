@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Question
@@ -25,6 +26,7 @@ class Question
      * @var string
      *
      * @ORM\Column(name="question", type="string", length=30, nullable=false)
+    * @Assert\NotBlank(message="Question est obligatoire")
      */
     private $question;
 
@@ -32,6 +34,8 @@ class Question
      * @var string
      *
      * @ORM\Column(name="matiere", type="string", length=30, nullable=false)
+         * @Assert\NotBlank(message="Matiere est obligatoire")
+
      */
     private $matiere;
 
@@ -39,6 +43,8 @@ class Question
      * @var string
      *
      * @ORM\Column(name="R1", type="string", length=30, nullable=false)
+    * @Assert\NotBlank(message="Reponse 1 est obligatoire")
+
      */
     private $r1;
 
@@ -46,6 +52,8 @@ class Question
      * @var string
      *
      * @ORM\Column(name="R2", type="string", length=30, nullable=false)
+         * @Assert\NotBlank(message="Reponse 2 est obligatoire")
+
      */
     private $r2;
 
@@ -53,6 +61,8 @@ class Question
      * @var string
      *
      * @ORM\Column(name="R3", type="string", length=30, nullable=false)
+         * @Assert\NotBlank(message="Reponse 3 est obligatoire")
+
      */
     private $r3;
 
@@ -60,6 +70,8 @@ class Question
      * @var string
      *
      * @ORM\Column(name="solution", type="string", length=30, nullable=false)
+    * @Assert\NotBlank(message="Solution  est obligatoire")
+
      */
     private $solution;
 
@@ -67,16 +79,14 @@ class Question
      * @var string
      *
      * @ORM\Column(name="difficulte", type="string", length=30, nullable=false)
+         * @Assert\NotBlank(message="Difficulté est obligatoire")
+
      */
     private $difficulte;
 
     /**
-     * @var \Quizs
      *
-     * @ORM\ManyToOne(targetEntity="Quizs")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_quizs", referencedColumnName="id_quizs")
-     * })
+     *   @ORM\Column(name="id_quizs",type="string", length=30, nullable=false)
      */
     private $idQuizs;
 
@@ -169,12 +179,12 @@ class Question
         return $this;
     }
 
-    public function getIdQuizs(): ?Quizs
-    {
+    public function getIdQuizs(): ?int
+    {   
         return $this->idQuizs;
     }
 
-    public function setIdQuizs(?Quizs $idQuizs): self
+    public function setIdQuizs(?int $idQuizs): self
     {
         $this->idQuizs = $idQuizs;
 
