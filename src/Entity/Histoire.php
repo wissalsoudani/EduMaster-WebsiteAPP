@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Histoire
@@ -23,8 +24,8 @@ class Histoire
 
     /**
      * @var int
-     *
      * @ORM\Column(name="age", type="integer", nullable=false)
+     * @Assert\NotBlank(message="Age is required")
      */
     private $age;
 
@@ -44,8 +45,8 @@ class Histoire
 
     /**
      * @var string
-     *
      * @ORM\Column(name="contenu_histoire", type="string", length=255, nullable=false)
+     * @Assert\Length(min=10, max=20)
      */
     private $contenuHistoire;
 

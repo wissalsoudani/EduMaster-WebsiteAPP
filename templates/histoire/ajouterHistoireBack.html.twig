@@ -4,6 +4,49 @@
 
 {% block body %}
 
-    {{ form(formHistoire) }}
+
+{#    <div class="custom-file">#}
+{#        <input type="file" class="custom-file-input" id="customFile">#}
+{#        <label class="custom-file-label" for="customFile">Choose file</label>#}
+{#        contenuHistoire=file;#}
+{#    </div>#}
+
+
+
+    {{form_start(formHistoire,{'attr':{'class':'form'}})}}
+
+    <h1> Ajouter une Histoire </h1>
+    <div class="row mb-3">
+
+    {{ form_errors(formHistoire.age) }}
+    {{ form_label(formHistoire.age,"Age") }}
+    {{ form_widget(formHistoire.age) }}
+
+
+    {{ form_errors(formHistoire.langue) }}
+    {{ form_label(formHistoire.langue,"langue") }}
+    {{ form_widget(formHistoire.langue)}}
+
+    {{ form_errors(formHistoire.nomHistoire) }}
+    {{ form_label(formHistoire.nomHistoire,"Nom de l'histoire") }}
+    {{ form_widget(formHistoire.nomHistoire)}}
+
+    {{ form_errors(formHistoire.contenuHistoire) }}
+    {{ form_label(formHistoire.contenuHistoire,"Contenu de l'histoire") }}
+    {{ form_widget(formHistoire.contenuHistoire)}}
+
+    {{ form_errors(formHistoire.couvertureHistoire) }}
+    {{ form_label(formHistoire.couvertureHistoire,"Couverture de l'histoire") }}
+
+    {{ form_widget(formHistoire.couvertureHistoire)}}
+
+
+    {{ form_errors(formHistoire.categorie) }}
+    {{ form_label(formHistoire.categorie,"Categorie de l'histoire") }}
+    {{ form_widget(formHistoire.categorie)}}
+
+    </div>
+    {{ form_end(formHistoire) }}
+
 
 {% endblock%}

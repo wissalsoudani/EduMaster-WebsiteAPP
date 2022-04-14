@@ -30,7 +30,7 @@ class HistoireController extends AbstractController
         $histoire = new Histoire();
         $form = $this->createForm(HistoireType::class,$histoire);
         $form->handleRequest($request);
-        if ( $form->isSubmitted()){
+        if ( $form->isSubmitted() && $form->isValid()){
             $em = $this->getDoctrine()->getManager();
             $em->persist($histoire);
             $em->flush();
