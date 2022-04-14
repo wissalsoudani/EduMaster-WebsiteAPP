@@ -1,0 +1,15 @@
+{% extends 'base-back.html.twig' %}
+{% block body %}
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+{{ form_errors(form.nomCours) }}
+{{ form_label(form.nomCours,"nomCours") }}
+{{ form_widget(form.nomCours)}}
+{{ form_errors(form.nbChapitres) }}
+{{ form_label(form.nbChapitres,"nbChapitres") }}
+{{ form_widget(form.nbChapitres)}}
+{{ form_errors(form.nbPages) }}
+{{ form_label(form.nbPages,"nbPages") }}
+{{ form_widget(form.nbPages)}}
+{{form_rest(form)}}
+{{form_end(form)}}
+{% endblock  %}

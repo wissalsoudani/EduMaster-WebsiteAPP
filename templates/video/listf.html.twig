@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+  <div class="row">
+    {% for v in videoss %}
+    <div class="col-sm-3">
+    <div class="card" style="width: 18rem;">
+  <div class="card-body">
+   <h5 class="card-title">Nom du cours correspondant: </h5> <p class="card-text">{{v.nomVideo}}</p>
+   <video src="uploads/{{v.description}}"width=300 height=200 controls></video>
+        <h6 class="card-title">Publiée le:<p class="card-text">{{ v.date}}</p></h6>
+        <h6 class="card-title">Dure:<p class="card-text">{{ v.dureeVideo}}</p></h6>
+  
+   </div> 
+</div>
+    </div>    
+    
+    {% endfor %}
+
+</div> 
+{% endblock %}

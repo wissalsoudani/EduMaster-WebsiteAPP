@@ -1,0 +1,29 @@
+{% extends 'base-back.html.twig' %}
+
+{% block body %}
+<table border="1">
+    <tr>
+        <td>Id</td>
+        <td>Nom</td>
+        <td>Contenu</td>
+        <td>Pages</td>
+        <td> Chapitres</td>
+      
+    </tr>
+    {% for c in courss %}
+        <tr>
+            <td>{{ c.idCours }}</td>
+            <td>{{  c.nomCours}}</td>
+            <td>{{ c.contenuCours }}</td>
+            <td>{{ c.nbPAges}}</td>
+            <td>{{ c.nbChapitres}}</td>
+            
+
+            <td><a href="{{ path('updateCours',{'id_cours':c.idCours}) }}">Update</a>
+            <a href="{{ path('deleteCours',{'id_cours':c.idCours}) }}">Delete</a>
+           
+        </tr>
+    {% endfor %}
+</table>
+<a href="{{ path('addCours') }}">Ajouter Cours</a>
+{% endblock %}

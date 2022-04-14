@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+  
+   <div class="row">
+    {% for c in courss %}
+   <div class="col-sm-3">
+     <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <img class="card-img-top" src="uploads/{{c.contenuCours}}" alt="Image du cours">
+        <h5 class="card-title">Nom du cours: </h5> <p class="card-text">{{c.nomCours}}</p>
+        <h6 class="card-title">Nombres de pages:<p class="card-text">{{c.nbPages}}</p></h6>
+        <h6 class="card-title">Nombre de chapitres: <p class="card-text">{{c.nbChapitres}}</p></h6>
+      </div>
+    </div>
+     </div>
+    
+    {% endfor %}
+   
+    </div>
+
+
+{% endblock %}

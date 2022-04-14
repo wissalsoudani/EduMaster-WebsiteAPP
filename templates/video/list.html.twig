@@ -1,0 +1,28 @@
+{% extends "base-back.html.twig" %}
+{% block body %}
+<table border="1">
+    <tr>
+        <td>Id</td>
+        <td>Nom</td>
+        <td>Date</td>
+        <td>Description</td>
+        <td>Duree</td>
+      
+    </tr>
+    {% for v in videoss %}
+        <tr>
+            <td>{{ v.idVideo }}</td>
+            <td>{{  v.nomVideo}}</td>
+            <td>{{ v.date }}</td>
+            <td>{{ v.description}}</td>
+            <td>{{ v.dureeVideo}}</td>
+            
+
+            <td><a href="{{ path('updateVideos',{'id_video':v.idVideo}) }}">Modifier</a>
+            <a href="{{ path('deleteVideos',{'id_video':v.idVideo}) }}">Supprimer</a>
+            
+        </tr>
+    {% endfor %}
+</table>
+<a href="{{ path('addVideos') }}">Ajouter Video</a>
+{% endblock %}
