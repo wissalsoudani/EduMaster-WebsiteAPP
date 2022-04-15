@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Reglement
  *
- * @ORM\Table(name="reglement", indexes={@ORM\Index(name="client", columns={"client"})})
+ * @ORM\Table(name="reglement", indexes={@ORM\Index(name="IDX_EBE4C14C19EB6921", columns={"client_id"}), @ORM\Index(name="IDX_EBE4C14C7F2DEE08", columns={"facture_id"})})
  * @ORM\Entity
  */
 class Reglement
@@ -20,20 +20,6 @@ class Reglement
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="client", type="string", length=50, nullable=false)
-     */
-    private $client;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="facture", type="string", length=50, nullable=false)
-     */
-    private $facture;
 
     /**
      * @var string
@@ -63,33 +49,29 @@ class Reglement
      */
     private $echeance;
 
+    /**
+     * @var \Client
+     *
+     * @ORM\ManyToOne(targetEntity="Client")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     * })
+     */
+    private $client;
+
+    /**
+     * @var \Facture
+     *
+     * @ORM\ManyToOne(targetEntity="Facture")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="facture_id", referencedColumnName="id")
+     * })
+     */
+    private $facture;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getClient(): ?string
-    {
-        return $this->client;
-    }
-
-    public function setClient(string $client): self
-    {
-        $this->client = $client;
-
-        return $this;
-    }
-
-    public function getFacture(): ?string
-    {
-        return $this->facture;
-    }
-
-    public function setFacture(string $facture): self
-    {
-        $this->facture = $facture;
-
-        return $this;
     }
 
     public function getModereg(): ?string
@@ -136,6 +118,30 @@ class Reglement
     public function setEcheance(string $echeance): self
     {
         $this->echeance = $echeance;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    public function getFacture(): ?Facture
+    {
+        return $this->facture;
+    }
+
+    public function setFacture(?Facture $facture): self
+    {
+        $this->facture = $facture;
 
         return $this;
     }

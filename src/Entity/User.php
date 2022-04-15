@@ -15,18 +15,18 @@ class User
     /**
      * @var int
      *
-     * @ORM\Column(name="id_user", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idUser;
+    private $id;
 
     /**
-     * @var int|null
+     * @var string
      *
-     * @ORM\Column(name="id_abonnement", type="integer", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="username", type="string", length=50, nullable=false)
      */
-    private $idAbonnement = NULL;
+    private $username;
 
     /**
      * @var string
@@ -38,65 +38,30 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="mdp", type="string", length=50, nullable=false)
+     * @ORM\Column(name="pwd", type="string", length=50, nullable=false)
      */
-    private $mdp;
+    private $pwd;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=15, nullable=false)
+     * @ORM\Column(name="role", type="string", length=50, nullable=false)
      */
-    private $nom;
+    private $role;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="prenom", type="string", length=15, nullable=false)
-     */
-    private $prenom;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="niveau", type="integer", nullable=false)
-     */
-    private $niveau;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="mail", type="string", length=50, nullable=false)
-     */
-    private $mail;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="code", type="text", length=65535, nullable=true, options={"default"="NULL"})
-     */
-    private $code = 'NULL';
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="etat", type="string", length=10, nullable=true, options={"default"="NULL"})
-     */
-    private $etat = 'NULL';
-
-    public function getIdUser(): ?int
+    public function getId(): ?int
     {
-        return $this->idUser;
+        return $this->id;
     }
 
-    public function getIdAbonnement(): ?int
+    public function getUsername(): ?string
     {
-        return $this->idAbonnement;
+        return $this->username;
     }
 
-    public function setIdAbonnement(?int $idAbonnement): self
+    public function setUsername(string $username): self
     {
-        $this->idAbonnement = $idAbonnement;
+        $this->username = $username;
 
         return $this;
     }
@@ -113,86 +78,26 @@ class User
         return $this;
     }
 
-    public function getMdp(): ?string
+    public function getPwd(): ?string
     {
-        return $this->mdp;
+        return $this->pwd;
     }
 
-    public function setMdp(string $mdp): self
+    public function setPwd(string $pwd): self
     {
-        $this->mdp = $mdp;
+        $this->pwd = $pwd;
 
         return $this;
     }
 
-    public function getNom(): ?string
+    public function getRole(): ?string
     {
-        return $this->nom;
+        return $this->role;
     }
 
-    public function setNom(string $nom): self
+    public function setRole(string $role): self
     {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): self
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    public function getNiveau(): ?int
-    {
-        return $this->niveau;
-    }
-
-    public function setNiveau(int $niveau): self
-    {
-        $this->niveau = $niveau;
-
-        return $this;
-    }
-
-    public function getMail(): ?string
-    {
-        return $this->mail;
-    }
-
-    public function setMail(string $mail): self
-    {
-        $this->mail = $mail;
-
-        return $this;
-    }
-
-    public function getCode(): ?string
-    {
-        return $this->code;
-    }
-
-    public function setCode(?string $code): self
-    {
-        $this->code = $code;
-
-        return $this;
-    }
-
-    public function getEtat(): ?string
-    {
-        return $this->etat;
-    }
-
-    public function setEtat(?string $etat): self
-    {
-        $this->etat = $etat;
+        $this->role = $role;
 
         return $this;
     }

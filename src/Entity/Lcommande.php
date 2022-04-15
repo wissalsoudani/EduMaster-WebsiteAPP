@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Lcommande
  *
- * @ORM\Table(name="lcommande")
+ * @ORM\Table(name="lcommande", indexes={@ORM\Index(name="IDX_57961F0AF347EFB", columns={"produit_id"})})
  * @ORM\Entity
  */
 class Lcommande
@@ -24,16 +24,9 @@ class Lcommande
     /**
      * @var string
      *
-     * @ORM\Column(name="Numc", type="string", length=50, nullable=false)
+     * @ORM\Column(name="numc", type="string", length=50, nullable=false)
      */
     private $numc;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="produit", type="string", length=50, nullable=false)
-     */
-    private $produit;
 
     /**
      * @var string
@@ -63,6 +56,16 @@ class Lcommande
      */
     private $lig;
 
+    /**
+     * @var \Produit
+     *
+     * @ORM\ManyToOne(targetEntity="Produit")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="produit_id", referencedColumnName="id")
+     * })
+     */
+    private $produit;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,18 +79,6 @@ class Lcommande
     public function setNumc(string $numc): self
     {
         $this->numc = $numc;
-
-        return $this;
-    }
-
-    public function getProduit(): ?string
-    {
-        return $this->produit;
-    }
-
-    public function setProduit(string $produit): self
-    {
-        $this->produit = $produit;
 
         return $this;
     }
@@ -136,6 +127,18 @@ class Lcommande
     public function setLig(string $lig): self
     {
         $this->lig = $lig;
+
+        return $this;
+    }
+
+    public function getProduit(): ?Produit
+    {
+        return $this->produit;
+    }
+
+    public function setProduit(?Produit $produit): self
+    {
+        $this->produit = $produit;
 
         return $this;
     }

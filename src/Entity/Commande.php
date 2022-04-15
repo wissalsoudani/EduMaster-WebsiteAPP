@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Commande
  *
- * @ORM\Table(name="commande")
+ * @ORM\Table(name="commande", indexes={@ORM\Index(name="IDX_6EEAA67D19EB6921", columns={"client_id"})})
  * @ORM\Entity
  */
 class Commande
@@ -24,16 +24,9 @@ class Commande
     /**
      * @var string
      *
-     * @ORM\Column(name="Numc", type="string", length=50, nullable=false)
+     * @ORM\Column(name="numc", type="string", length=50, nullable=false)
      */
     private $numc;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="client", type="string", length=50, nullable=false)
-     */
-    private $client;
 
     /**
      * @var \DateTime
@@ -70,6 +63,16 @@ class Commande
      */
     private $totttc;
 
+    /**
+     * @var \Client
+     *
+     * @ORM\ManyToOne(targetEntity="Client")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     * })
+     */
+    private $client;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -83,18 +86,6 @@ class Commande
     public function setNumc(string $numc): self
     {
         $this->numc = $numc;
-
-        return $this;
-    }
-
-    public function getClient(): ?string
-    {
-        return $this->client;
-    }
-
-    public function setClient(string $client): self
-    {
-        $this->client = $client;
 
         return $this;
     }
@@ -155,6 +146,18 @@ class Commande
     public function setTotttc(string $totttc): self
     {
         $this->totttc = $totttc;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }

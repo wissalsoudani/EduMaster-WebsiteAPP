@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Facture
  *
- * @ORM\Table(name="facture")
+ * @ORM\Table(name="facture", indexes={@ORM\Index(name="IDX_FE86641019EB6921", columns={"client_id"})})
  * @ORM\Entity
  */
 class Facture
@@ -20,13 +20,6 @@ class Facture
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="client", type="string", length=50, nullable=false)
-     */
-    private $client;
 
     /**
      * @var string
@@ -122,7 +115,7 @@ class Facture
     /**
      * @var string
      *
-     * @ORM\Column(name="montrs", type="string", length=50, nullable=false)
+     * @ORM\Column(name="montrs", type="string", length=5, nullable=false)
      */
     private $montrs;
 
@@ -133,21 +126,19 @@ class Facture
      */
     private $net;
 
+    /**
+     * @var \Client
+     *
+     * @ORM\ManyToOne(targetEntity="Client")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     * })
+     */
+    private $client;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getClient(): ?string
-    {
-        return $this->client;
-    }
-
-    public function setClient(string $client): self
-    {
-        $this->client = $client;
-
-        return $this;
     }
 
     public function getBase0(): ?string
@@ -326,6 +317,18 @@ class Facture
     public function setNet(string $net): self
     {
         $this->net = $net;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }

@@ -28,13 +28,6 @@ class Famille
      */
     private $libelle;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Produits", type="string", length=50, nullable=false)
-     */
-    private $produits;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -48,18 +41,6 @@ class Famille
     public function setLibelle(string $libelle): self
     {
         $this->libelle = $libelle;
-
-        return $this;
-    }
-
-    public function getProduits(): ?string
-    {
-        return $this->produits;
-    }
-
-    public function setProduits(string $produits): self
-    {
-        $this->produits = $produits;
 
         return $this;
     }

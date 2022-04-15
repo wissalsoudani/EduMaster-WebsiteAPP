@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Produit
  *
- * @ORM\Table(name="produit", indexes={@ORM\Index(name="famille", columns={"famille"})})
+ * @ORM\Table(name="produit")
  * @ORM\Entity
  */
 class Produit
@@ -22,57 +23,71 @@ class Produit
     private $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="famille_id", type="integer", nullable=false)
+     */
+    private $familleId;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="libelle", type="string", length=50, nullable=false)
+    * @Assert\NotBlank(message="Liebelle est obligatoire")
+
      */
     private $libelle;
 
     /**
      * @var float
-     *
+          * @Assert\Positive
      * @ORM\Column(name="pa", type="float", precision=10, scale=0, nullable=false)
      */
     private $pa;
 
     /**
      * @var float
-     *
+          * @Assert\Positive
      * @ORM\Column(name="pv", type="float", precision=10, scale=0, nullable=false)
      */
     private $pv;
 
     /**
      * @var int
-     *
+          * @Assert\Positive
      * @ORM\Column(name="tva", type="integer", nullable=false)
      */
     private $tva;
 
     /**
      * @var int
-     *
+          * @Assert\Positive
      * @ORM\Column(name="stock", type="integer", nullable=false)
      */
     private $stock;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="image", type="blob", length=0, nullable=false)
+    * @Assert\NotBlank(message="Image est obligatoire")
+     * @ORM\Column(name="image", type="string", length=255, nullable=false)
      */
     private $image;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="famille", type="string", length=50, nullable=false)
-     */
-    private $famille;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getFamilleId(): ?int
+    {
+        return $this->familleId;
+    }
+
+    public function setFamilleId(int $familleId): self
+    {
+        $this->familleId = $familleId;
+
+        return $this;
     }
 
     public function getLibelle(): ?string
@@ -135,26 +150,14 @@ class Produit
         return $this;
     }
 
-    public function getImage()
+    public function getImage(): ?string
     {
         return $this->image;
     }
 
-    public function setImage($image): self
+    public function setImage(string $image): self
     {
         $this->image = $image;
-
-        return $this;
-    }
-
-    public function getFamille(): ?string
-    {
-        return $this->famille;
-    }
-
-    public function setFamille(string $famille): self
-    {
-        $this->famille = $famille;
 
         return $this;
     }
