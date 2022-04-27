@@ -52,7 +52,7 @@ class TestHistoireController extends AbstractController
     }
 
 
-    public function validTest(TestHistoire $t1, TestHistoire $t2):bool
+    public function validTest(TestHistoire $t1, TestHistoire $t2): bool
     {
 
         return true;
@@ -72,7 +72,25 @@ class TestHistoireController extends AbstractController
             ->setParameter('id_histoire', $idHistoire)
             ->getOneOrNullResult();
 
+
+        $r11 = $request->query->get('r11');
+        $r12 = $request->query->get('r12');
+        $r13 = $request->query->get('r13');
+        $r21 = $request->query->get('r21');
+        $r22 = $request->query->get('r22');
+        $r23 = $request->query->get('r23');
+        $r31 = $request->query->get('r31');
+        $r32 = $request->query->get('r32');
+        $r33 = $request->query->get('r33');
+
+        if( $TestHistoireValid->getCorrectionq1() != $r11 && $TestHistoireValid->getCorrectionq2() == $r12 ){
+            return $this->redirectToRoute("afficherH");
+        }
+
+
+
         $TestHistoire = new TestHistoire();
+
 
         $form = $this->createForm(TestHistoireType::class, $TestHistoire);
         $form->handleRequest($request);
@@ -80,9 +98,9 @@ class TestHistoireController extends AbstractController
 
             return $this->redirectToRoute("afficherH");
         } else {
-            return $this->render("test_histoire/afficherTest.html.twig", array('testHistoireValide'=>$TestHistoireValid));
+            return $this->render("test_histoire/afficherTest.html.twig", array('testHistoireValide' => $TestHistoireValid));
         }
-        return $this->render("test_histoire/afficherTest.html.twig", array('testHistoireValide'=>$TestHistoireValid));
+        return $this->render("test_histoire/afficherTest.html.twig", array('testHistoireValide' => $TestHistoireValid));
     }
 
     /**
