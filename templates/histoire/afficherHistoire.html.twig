@@ -3,12 +3,22 @@
 {% block title %}HISTOIRES{% endblock %}
 
 {% block body %}
+    <section class="inner-banner py-5">
+        <div class="w3l-breadcrumb py-lg-5">
+            <div class="container pt-4 pb-sm-4">
+                <h4 class="inner-text-title pt-5">HISTOIRES</h4>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><i class="fas fa-angle-right"></i>HISTOIRES</li>
+                </ul>
+            </div>
+        </div>
+    </section>
     <!-- courses section -->
             <div class="w3l-grids-block-5 py-5">
                 <div class="container py-md-5 py-4">
                     <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
-                        <h3 class="title-style">HISTOIRES</h3>
-                        <p class="text-uppercase">"Lire c'est s'enrechir"</p>
+                        <h5 class="text-uppercase">"Lire c'est s'enrechir"</h5>
                     </div>
                     <div class="row justify-content-center">
                         {% for i in histoires %}
@@ -17,21 +27,21 @@
                                 <div class="grids5-info position-relative">
                                     <img src="{{ asset(i.couvertureHistoire) }}" alt="" class="img-fluid"/>
                                     <div class="meta-list">
-                                        <a href="courses.html" class="sec-2">{{ i.categorie }}</a>
+                                        <a href="" class="sec-2">{{ i.categorie }}</a>
                                     </div>
                                 </div>
                                 <div class="content-main-top">
                                     <div class="content-top mb-4 mt-3">
                                         <ul class="list-unstyled d-flex align-items-center justify-content-between">
-                                            <li> <i class="fas fa-book-open"></i> 72 Lesson</li>
+                                            <li> <i class="fas fa-book-open"></i>Age: {{ i.age }} Ans</li>
                                             <li> <i class="fas fa-star"></i> 4.3</li>
                                         </ul>
                                     </div>
-                                    <h4><a href="courses.html">{{ i.nomHistoire }}</a></h4>
-                                    <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <h4><a href="">{{ i.nomHistoire }}</a></h4>
+                                    <p></p>
                                     <div class="top-content-border d-flex align-items-center justify-content-between mt-4 pt-4">
-                                        <h6>{{ i.langue }}</h6>
-                                        <a class="btn btn-style-primary" href="{{ path('afficherDetailsHistoire',{'id':i.idHistoire}) }}">Know Details<i
+                                        <h7>Langue: {{ i.langue }}</h7>
+                                        <a class="btn btn-style-primary" href="{{ path('afficherDetailsHistoire',{'id':i.idHistoire}) }}">Afficher Histoire<i
                                                     class="fas fa-arrow-right"></i></a>
                                     </div>
                                 </div>

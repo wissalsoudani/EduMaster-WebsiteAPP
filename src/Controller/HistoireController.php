@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Flash;
 
 class HistoireController extends AbstractController
 {
@@ -21,9 +22,6 @@ class HistoireController extends AbstractController
             'controller_name' => 'HistoireController',
         ]);
     }
-
-
-
 
 
     /**
@@ -39,7 +37,6 @@ class HistoireController extends AbstractController
              * @var UploadedFile $file
              * @var UploadedFile $pdf
              */
-
 
             $file = $form['couvertureHistoire']->getData();
             $pdf= $form['contenuHistoire']->getData();
@@ -60,6 +57,7 @@ class HistoireController extends AbstractController
         return $this->render("histoire/ajouterHistoireBack.html.twig", array("formHistoire"=>$form->createView()));
     }
 
+
     /**
     * @Route ("/back/afficherHistoire",name ="afficherHistoire")
      */
@@ -77,6 +75,7 @@ class HistoireController extends AbstractController
         $histoire=$this->getDoctrine()->getRepository(Histoire::class)->findAll();
         return $this->render("histoire/afficherHistoire.html.twig",array('histoires'=>$histoire));
     }
+
 
     /**
      * @param $id
@@ -98,7 +97,7 @@ class HistoireController extends AbstractController
         $em=$this->getDoctrine()->getManager();
         $em->remove($histoire);
         $em->flush();
-        $this->addFlash('histoire supprimé avec succés!');
+        $this->addFlash('success','histoire supprimé avec succées!');
         return $this->redirectToRoute("afficherHistoire");
     }
 
@@ -110,9 +109,23 @@ class HistoireController extends AbstractController
         $form = $this->createForm(HistoireType::class,$histoire);
         $form->handleRequest($request);
         if ( $form->isSubmitted()){
+            /**
+             * @var UploadedFile $file
+             * @var UploadedFile $pdf
+             */
+
+            $file = $form['couvertureHistoire']->getData();
+            $pdf= $form['contenuHistoire']->getData();
+
+            $file->move('images/histoires/couverture/', $file->getClientOriginalName());
+            $histoire->setCouvertureHistoire("images/histoires/couverture/".$file->getClientOriginalName());
+
+            $pdf->move('images/histoires/contenu/', $pdf->getClientOriginalName());
+            $histoire->setContenuHistoire("images/histoires/contenu/".$pdf->getClientOriginalName());
+
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-            $this->addFlash('histoire modifié avec succés!');
+            $this->addFlash('success','histoire modifié avec succées!');
             return $this->redirectToRoute("afficherHistoire");
         }
         return $this->render("histoire/modifierHistoireBack.html.twig", array("formHistoire"=>$form->createView()));

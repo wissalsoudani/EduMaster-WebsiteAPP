@@ -1,16 +1,7 @@
 {% extends 'base-back.html.twig' %}
 
 {% block title %}Hello TestController!{% endblock %}
-
 {% block body %}
-
-
-    {#    <div class="custom-file"> #}
-    {#        <input type="file" class="custom-file-input" id="customFile"> #}
-    {#        <label class="custom-file-label" for="customFile">Choose file</label> #}
-    {#        contenuHistoire=file; #}
-    {#    </div> #}
-
 
 
     {{ form_start(formHistoire,{'attr':{'novalidate':'novalidate'}}) }}
@@ -49,8 +40,6 @@
 
     </div>
     {{ form_end(formHistoire) }}
-
-
 
 
 {% endblock %}

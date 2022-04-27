@@ -25,6 +25,7 @@ class Histoire
     /**
      * @var int
      * @ORM\Column(name="age", type="integer", nullable=false)
+     * @Assert\Range(min="7",max="12",notInRangeMessage="Age must be between {{ min }}ans and {{ max }}ans to enter")
      * @Assert\NotBlank(message="Age is required")
      */
     private $age;
