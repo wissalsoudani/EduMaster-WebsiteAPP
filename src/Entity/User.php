@@ -13,21 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
 class User
 {
     /**
-     * @return int
-     */
-    public function getScore(): int
-    {
-        return $this->score;
-    }
-
-    /**
-     * @param int $score
-     */
-    public function setScore(int $score): void
-    {
-        $this->score = $score;
-    }
-    /**
      * @var int
      *
      * @ORM\Column(name="id_user", type="integer", nullable=false)
@@ -85,21 +70,19 @@ class User
      */
     private $mail;
 
-
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="score", type="string", length=50, nullable=false)
-     */
-    private $score;
-
     /**
      * @var string|null
      *
      * @ORM\Column(name="code", type="text", length=65535, nullable=true, options={"default"="NULL"})
      */
     private $code = 'NULL';
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="score", type="integer", nullable=false)
+     */
+    private $score;
 
     /**
      * @var string|null
@@ -205,6 +188,18 @@ class User
     public function setCode(?string $code): self
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    public function getScore(): ?int
+    {
+        return $this->score;
+    }
+
+    public function setScore(int $score): self
+    {
+        $this->score = $score;
 
         return $this;
     }

@@ -9,6 +9,8 @@ use App\Form\TestHistoireType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TestHistoireController extends AbstractController
@@ -62,10 +64,10 @@ class TestHistoireController extends AbstractController
      * @param $idHistoire
      * @Route ("/afficherTest/{idHistoire}",name="afficherTest")
      */
-    public function afficherTest(Request $request, $idHistoire)
+    public function afficherTest(Request $request,MailerInterface $mailer, $idHistoire)
     {
 
-        $connectedUser = $this->getDoctrine()->getRepository(User::class)->find(1);
+        $connectedUser = $this->getDoctrine()->getRepository(User::class)->find(20);
 
         $TestHistoireValid = $this->getDoctrine()->getManager()
             ->createQuery('SELECT i
@@ -82,26 +84,25 @@ class TestHistoireController extends AbstractController
         $r2 = $request->query->get('R2');
         $r3 = $request->query->get('R3');
 
+        if ($r1 == NULL && $r2 == NULL && $r3 == NULL) {
 
-        if ((strcmp($c1, $r1) == 0) && (strcmp($c2, $r2) == 0) && (strcmp($c3, $r3) == 0)) {
-            $this->addFlash('success','Test valide  avec succées!');
-
-
-
-
-        }
-
-
-        $TestHistoire = new TestHistoire();
-
-
-        $form = $this->createForm(TestHistoireType::class, $TestHistoire);
-        $form->handleRequest($request);
-        if (false) {
-
-            return $this->redirectToRoute("afficherH");
         } else {
-            return $this->render("test_histoire/afficherTest.html.twig", array('testHistoireValide' => $TestHistoireValid));
+
+            if ((strcmp($c1, $r1) == 0) && (strcmp($c2, $r2) == 0) && (strcmp($c3, $r3) == 0)) {
+                $this->addFlash('success', 'Test valide  avec succées!');
+                $connectedUser->setScore($connectedUser->getScore() + 10);
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                //email update score to user
+                $email = (new Email())
+                    ->from('wissal.soudani@esprit.tn')
+                    ->to($connectedUser->getMail())
+                    ->subject('Félicitation ' . $connectedUser->getNom().'! ')
+                    ->text('Le score de votre enfant a éte augmenté!');
+                $mailer->send($email);
+            } else {
+                $this->addFlash('error', 'Test non valide!');
+            }
         }
         return $this->render("test_histoire/afficherTest.html.twig", array('testHistoireValide' => $TestHistoireValid));
     }

@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Histoire
@@ -24,9 +23,8 @@ class Histoire
 
     /**
      * @var int
+     *
      * @ORM\Column(name="age", type="integer", nullable=false)
-     * @Assert\Range(min="7",max="12",notInRangeMessage="Age must be between {{ min }}ans and {{ max }}ans to enter")
-     * @Assert\NotBlank(message="Age is required")
      */
     private $age;
 
@@ -34,7 +32,6 @@ class Histoire
      * @var string
      *
      * @ORM\Column(name="langue", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(message="langue is required")
      */
     private $langue;
 
@@ -42,15 +39,13 @@ class Histoire
      * @var string
      *
      * @ORM\Column(name="nom_histoire", type="string", length=255, nullable=false)
-     * @Assert\Length(min=5, max=20)
-     * @Assert\NotBlank(message="the name is required")
      */
     private $nomHistoire;
 
     /**
      * @var string
+     *
      * @ORM\Column(name="contenu_histoire", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(message="content is required")
      */
     private $contenuHistoire;
 
@@ -58,8 +53,6 @@ class Histoire
      * @var string
      *
      * @ORM\Column(name="couverture_histoire", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(message="cover is required")
-
      */
     private $couvertureHistoire;
 
@@ -67,8 +60,6 @@ class Histoire
      * @var string
      *
      * @ORM\Column(name="catégorie", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(message="category is required")
-
      */
     private $categorie;
 
