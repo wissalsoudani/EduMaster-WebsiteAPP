@@ -53,13 +53,6 @@ class TestHistoireController extends AbstractController
         return $this->render("test_histoire/afficherTestHistoire.html.twig", array('Testhistoires' => $TestHistoire));
     }
 
-
-    public function validTest(TestHistoire $t1, TestHistoire $t2): bool
-    {
-
-        return true;
-    }
-
     /**
      * @param $idHistoire
      * @Route ("/afficherTest/{idHistoire}",name="afficherTest")
@@ -68,6 +61,7 @@ class TestHistoireController extends AbstractController
     {
 
         $connectedUser = $this->getDoctrine()->getRepository(User::class)->find(20);
+        $hiss = $this->getDoctrine()->getRepository(Histoire::class)->find($idHistoire);
 
         $TestHistoireValid = $this->getDoctrine()->getManager()
             ->createQuery('SELECT i
@@ -104,7 +98,7 @@ class TestHistoireController extends AbstractController
                 $this->addFlash('error', 'Test non valide!');
             }
         }
-        return $this->render("test_histoire/afficherTest.html.twig", array('testHistoireValide' => $TestHistoireValid));
+        return $this->render("test_histoire/afficherTest.html.twig", array('testHistoireValide' => $TestHistoireValid,'histoire'=>$hiss));
     }
 
     /**
@@ -120,7 +114,6 @@ class TestHistoireController extends AbstractController
         return $this->redirectToRoute("afficherTestHistoire");
     }
 
-
     /**
      * @Route ("/back/modifierTestHistoire/{idTest}",name="modifierTestHistoire")
      */
@@ -135,74 +128,5 @@ class TestHistoireController extends AbstractController
             return $this->redirectToRoute("afficherTestHistoire");
         }
         return $this->render("test_histoire/modifierTestHistoire.html.twig", array('formTestHistoire' => $form->createView()));
-    }
-
-
-    /**
-     * @Route ("/back/validation/{idTest}/{question}/{reponse1}/{reponse2}/{reponse3}",name="validerTestHistoire")
-     */
-    public function validation(Request $request, $idTest, $question, $reponse1, $reponse2, $reponse3)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $Testhistoire = $this->getDoctrine()->getRepository(TestHistoire::class)->find($idTest);
-        $query1 = $em->createQuery(
-            'Select correctionQ1 FROM src/Entity/TestHistoire 
-            where id_test=$idTest '
-        );
-
-        $query2 = $em->createQuery(
-            'Select correctionQ2 FROM src/Entity/TestHistoire 
-where id_test=$idTest'
-        );
-
-        $query3 = $em->createQuery(
-            'Select correctionQ3 FROM src/Entity/TestHistoire
-where id_test=$idTest'
-        );
-
-        $correction1 = $query1->getResult;
-        $correction2 = $query2->getResult;
-        $correction3 = $query3->getResult;
-        $current_user = 1; // To change Wissal
-        $user = $this->getDoctrine()->getRepository(User::class)->findBy($current_user);
-
-
-        $form = $this->createForm(TestHistoireType::class, $Testhistoire);
-        $form->handleRequest($request);
-        $r = 0;
-        if ($form->isSubmitted()) {
-            $r = $r + 1;
-            if ($correction1 == $reponse1) {
-                $score = $user->getScore();
-                $score = $score + 10;
-                $user->setScore($score);
-                $this->getDoctrine()->getManager()->flush();
-
-            }
-            if ($correction2 == $reponse2) {
-                $r = $r + 1;
-                $score = $user->getScore();
-                $score = $score + 10;
-                $user->setScore($score);
-                $this->getDoctrine()->getManager()->flush();
-            }
-            if ($correction3 == $reponse3) {
-                $r = $r + 1;
-                $score = $user->getScore();
-                $score = $score + 10;
-                $user->setScore($score);
-                $this->getDoctrine()->getManager()->flush();
-            }
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
-            if ($r == 3) {
-                return $this->render("Testhistoire/GOOD.html.twig", array("formTestHistoire" => $form->createView()));
-
-            } else {
-                return $this->render("Testhistoire/WRONG.html.twig", array("formTestHistoire" => $form->createView()));
-            }
-        }
-
-
     }
 }

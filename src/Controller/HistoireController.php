@@ -47,7 +47,6 @@ class HistoireController extends AbstractController
             $pdf->move('images/histoires/contenu/', $pdf->getClientOriginalName());
             $histoire->setContenuHistoire("images/histoires/contenu/".$pdf->getClientOriginalName());
 
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($histoire);
             $em->flush();
@@ -61,9 +60,17 @@ class HistoireController extends AbstractController
     /**
     * @Route ("/back/afficherHistoire",name ="afficherHistoire")
      */
-    public function afficherHistoire(){
+    public function afficherHistoire(Request $request){
 
         $histoire=$this->getDoctrine()->getRepository(Histoire::class)->findAll();
+        $em=$this->getDoctrine()->getManager();
+
+        if ($request->isXmlHttpRequest()) {
+            $search  = $request->get('search');
+            dump($search);
+            $repo  = $em->getRepository(Histoire::class);
+            $event = $repo->find($search);
+        }
         return $this->render("histoire/afficherHistoireBack.html.twig",array('histoires'=>$histoire));
     }
 
@@ -71,12 +78,16 @@ class HistoireController extends AbstractController
      * @Route ("/afficherHistoire",name ="afficherH")
      */
     public function afficher(){
-
         $histoire=$this->getDoctrine()->getRepository(Histoire::class)->findAll();
         return $this->render("histoire/afficherHistoire.html.twig",array('histoires'=>$histoire));
     }
 
+    public function rechercheAjaxAction(Request $request)
+    {
 
+
+
+    }
     /**
      * @param $id
      * @Route ("/afficherDetailsHistoire/{id}",name="afficherDetailsHistoire")
@@ -84,7 +95,6 @@ class HistoireController extends AbstractController
     public function afficherDetailsHistoire($id){
         $histoire=$this->getDoctrine()->getRepository(Histoire::class)->find($id);
         return $this->render("histoire/afficherDetailsHistoire.html.twig",array('histoire'=>$histoire));
-
     }
 
 
