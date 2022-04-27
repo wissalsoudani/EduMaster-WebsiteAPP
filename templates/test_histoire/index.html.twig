@@ -1,20 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TestHistoireController!{% endblock %}
+{% block title %}TestHistoire index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>TestHistoire index</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>IdTest</th>
+            <th>Question1</th>
+            <th>R11</th>
+            <th>R12</th>
+            <th>R13</th>
+            <th>Correctionq1</th>
+            <th>Question2</th>
+            <th>R21</th>
+            <th>R22</th>
+            <th>R23</th>
+            <th>Correctionq2</th>
+            <th>Question3</th>
+            <th>R31</th>
+            <th>R32</th>
+            <th>R33</th>
+            <th>Correctionq3</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for test_histoire in test_histoires %}
+            <tr>
+                <td>{{ test_histoire.idTest }}</td>
+                <td>{{ test_histoire.question1 }}</td>
+                <td>{{ test_histoire.r11 }}</td>
+                <td>{{ test_histoire.r12 }}</td>
+                <td>{{ test_histoire.r13 }}</td>
+                <td>{{ test_histoire.correctionq1 }}</td>
+                <td>{{ test_histoire.question2 }}</td>
+                <td>{{ test_histoire.r21 }}</td>
+                <td>{{ test_histoire.r22 }}</td>
+                <td>{{ test_histoire.r23 }}</td>
+                <td>{{ test_histoire.correctionq2 }}</td>
+                <td>{{ test_histoire.question3 }}</td>
+                <td>{{ test_histoire.r31 }}</td>
+                <td>{{ test_histoire.r32 }}</td>
+                <td>{{ test_histoire.r33 }}</td>
+                <td>{{ test_histoire.correctionq3 }}</td>
+                <td>
+                    <a href="{{ path('app_test_histoire_show', {'idTest': test_histoire.idTest}) }}">show</a>
+                    <a href="{{ path('app_test_histoire_edit', {'idTest': test_histoire.idTest}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="17">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/EduMasterWeb/src/Controller/TestHistoireController.php'|file_link(0) }}">src/Controller/TestHistoireController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/EduMasterWeb/templates/test_histoire/index.html.twig'|file_link(0) }}">templates/test_histoire/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <a href="{{ path('app_test_histoire_new') }}">Create new</a>
 {% endblock %}

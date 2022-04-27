@@ -7,8 +7,8 @@
             <div class="w3l-grids-block-5 py-5">
                 <div class="container py-md-5 py-4">
                     <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
-                        <p class="text-uppercase">Histoire</p>
-                        <h3 class="title-style">Find The Right Course For You</h3>
+                        <h3 class="title-style">HISTOIRES</h3>
+                        <p class="text-uppercase">"Lire c'est s'enrechir"</p>
                     </div>
                     <div class="row justify-content-center">
                         {% for i in histoires %}
@@ -31,7 +31,7 @@
                                     <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                     <div class="top-content-border d-flex align-items-center justify-content-between mt-4 pt-4">
                                         <h6>{{ i.langue }}</h6>
-                                        <a class="btn btn-style-primary" href="courses.html">Know Details<i
+                                        <a class="btn btn-style-primary" href="{{ path('afficherDetailsHistoire',{'id':i.idHistoire}) }}">Know Details<i
                                                     class="fas fa-arrow-right"></i></a>
                                     </div>
                                 </div>

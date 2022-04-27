@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TestHistoire{% endblock %}
+
+{% block body %}
+    <h1>GOOD JOB</h1>
+
+
+    <a href="{{ path('app_test_histoire_index') }}">back to list</a>
+
+    <a href="{{ path('app_test_histoire_edit', {'idTest': test_histoire.idTest}) }}">edit</a>
+
+    {{ include('test_histoire/supprimerTestHistoire.html.twig') }}
+{% endblock %}

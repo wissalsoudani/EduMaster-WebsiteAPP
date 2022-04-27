@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use GuzzleHttp\Psr7\UploadedFile;
 
 use App\Entity\Histoire;
 use App\Form\HistoireType;
@@ -21,19 +22,39 @@ class HistoireController extends AbstractController
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @Route ("/back/ajouterHistoire", name ="")
-     */
 
+
+
+
+    /**
+     * @Route ("/back/ajouterHistoire", name ="ajouterHistoire")
+     */
     public function ajouterHistoire(Request $request){
         $histoire = new Histoire();
         $form = $this->createForm(HistoireType::class,$histoire);
         $form->handleRequest($request);
         if ( $form->isSubmitted() && $form->isValid()){
+
+            /**
+             * @var UploadedFile $file
+             * @var UploadedFile $pdf
+             */
+
+
+            $file = $form['couvertureHistoire']->getData();
+            $pdf= $form['contenuHistoire']->getData();
+
+            $file->move('images/histoires/couverture/', $file->getClientOriginalName());
+            $histoire->setCouvertureHistoire("images/histoires/couverture/".$file->getClientOriginalName());
+
+            $pdf->move('images/histoires/contenu/', $pdf->getClientOriginalName());
+            $histoire->setContenuHistoire("images/histoires/contenu/".$pdf->getClientOriginalName());
+
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($histoire);
             $em->flush();
+            $this->addFlash('success','histoire ajouté avec succées!');
             return $this->redirectToRoute("afficherHistoire");
         }
         return $this->render("histoire/ajouterHistoireBack.html.twig", array("formHistoire"=>$form->createView()));
@@ -59,6 +80,17 @@ class HistoireController extends AbstractController
 
     /**
      * @param $id
+     * @Route ("/afficherDetailsHistoire/{id}",name="afficherDetailsHistoire")
+     */
+    public function afficherDetailsHistoire($id){
+        $histoire=$this->getDoctrine()->getRepository(Histoire::class)->find($id);
+        return $this->render("histoire/afficherDetailsHistoire.html.twig",array('histoire'=>$histoire));
+
+    }
+
+
+    /**
+     * @param $id
      * @Route ("/back/supprimerHistoire/{id}",name="supprimerHistoire")
      */
     public function supprimerHistoire($id){
@@ -66,6 +98,7 @@ class HistoireController extends AbstractController
         $em=$this->getDoctrine()->getManager();
         $em->remove($histoire);
         $em->flush();
+        $this->addFlash('histoire supprimé avec succés!');
         return $this->redirectToRoute("afficherHistoire");
     }
 
@@ -79,6 +112,7 @@ class HistoireController extends AbstractController
         if ( $form->isSubmitted()){
             $em = $this->getDoctrine()->getManager();
             $em->flush();
+            $this->addFlash('histoire modifié avec succés!');
             return $this->redirectToRoute("afficherHistoire");
         }
         return $this->render("histoire/modifierHistoireBack.html.twig", array("formHistoire"=>$form->createView()));

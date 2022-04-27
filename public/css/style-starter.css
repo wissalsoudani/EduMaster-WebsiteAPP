@@ -11885,8 +11885,10 @@ select,
 label,
 li,
 span {
-  -webkit-appearance: none;
   outline: none;
+}
+input[type="radio"]{
+  -webkit-appearance: radio;
 }
 
 a,
@@ -19317,28 +19319,29 @@ header.nav-fixed {
 
 /* title style */
 h3.title-style {
-  font-size: 45px;
+  font-size: 35px;
   line-height: 55px;
+  alignment: center;
   font-weight: bold;
 }
 
 @media (max-width:991px) {
   h3.title-style {
-    font-size: 40px;
+    font-size: 24px;
     line-height: 50px;
   }
 }
 
 @media (max-width:568px) {
   h3.title-style {
-    font-size: 35px;
+    font-size: 24px;
     line-height: 45px;
   }
 }
 
 @media (max-width:320px) {
   h3.title-style {
-    font-size: 30px;
+    font-size: 24px;
     line-height: 40px;
   }
 }
@@ -20886,7 +20889,7 @@ p.copy-footer-29 a:hover {
 
 /* inner banner */
 .inner-banner {
-  background: url(../images/banner3.jpg) no-repeat center;
+  background: url(images/couverture/banner3.jpg) no-repeat center;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;

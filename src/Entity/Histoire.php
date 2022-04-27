@@ -33,6 +33,7 @@ class Histoire
      * @var string
      *
      * @ORM\Column(name="langue", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="langue is required")
      */
     private $langue;
 
@@ -40,13 +41,15 @@ class Histoire
      * @var string
      *
      * @ORM\Column(name="nom_histoire", type="string", length=255, nullable=false)
+     * @Assert\Length(min=5, max=20)
+     * @Assert\NotBlank(message="the name is required")
      */
     private $nomHistoire;
 
     /**
      * @var string
      * @ORM\Column(name="contenu_histoire", type="string", length=255, nullable=false)
-     * @Assert\Length(min=10, max=20)
+     * @Assert\NotBlank(message="content is required")
      */
     private $contenuHistoire;
 
@@ -54,6 +57,8 @@ class Histoire
      * @var string
      *
      * @ORM\Column(name="couverture_histoire", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="cover is required")
+
      */
     private $couvertureHistoire;
 
@@ -61,6 +66,8 @@ class Histoire
      * @var string
      *
      * @ORM\Column(name="catégorie", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="category is required")
+
      */
     private $categorie;
 

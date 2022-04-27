@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HISTOIRES{% endblock %}
+
+{% block body %}
+
+    <!-- home image with content block -->
+    <section class="w3l-servicesblock pt-lg-5 pt-4 pb-5 mb-lg-5" id="about">
+        <div class="container pb-md-5 pb-4">
+            <div class="row pb-xl-5 align-items-center">
+                <div class="col-lg-6 position-relative home-block-3-left pb-lg-0 pb-5">
+                    <div class="position-relative">
+                        <object type="application/pdf" width="100%" height="450px"
+                                data="{{ asset(histoire.contenuHistoire ) }}">
+                        </object>
+                    </div>
+                </div>
+                <div class="col-xl-5 col-lg-6 offset-xl-1 mt-lg-0 mt-5 pt-lg-0 pt-5">
+                    <h4 class="title-style" >{{ histoire.nomHistoire }}</h4>
+                    <img src="{{ asset( histoire.couvertureHistoire ) }}" width="400px" height="400px" alt="" class="img-fluid radius-image">
+                    <ul class="mt-4 list-style-lis pt-lg-1">
+                        <li><i class="fas fa-check-circle"></i>{{ histoire.langue }}</li>
+                        <li><i class="fas fa-check-circle"></i>{{ histoire.age }} ans</li>
+                        <li><i class="fas fa-check-circle"></i>{{ histoire.categorie }}</li>
+                    </ul>
+                    <a href="{{ path('afficherTest',{'idHistoire':histoire.idHistoire}) }}" class="btn btn-style mt-5">Prendre le Test!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //home image with content block -->
+
+
+{% endblock %}
