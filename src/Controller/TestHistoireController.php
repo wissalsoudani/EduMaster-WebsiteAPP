@@ -65,6 +65,8 @@ class TestHistoireController extends AbstractController
     public function afficherTest(Request $request, $idHistoire)
     {
 
+        $connectedUser = $this->getDoctrine()->getRepository(User::class)->find(1);
+
         $TestHistoireValid = $this->getDoctrine()->getManager()
             ->createQuery('SELECT i
             FROM App\Entity\TestHistoire i
@@ -72,21 +74,22 @@ class TestHistoireController extends AbstractController
             ->setParameter('id_histoire', $idHistoire)
             ->getOneOrNullResult();
 
+        $c1 = $TestHistoireValid->getCorrectionq1();
+        $c2 = $TestHistoireValid->getCorrectionq2();
+        $c3 = $TestHistoireValid->getCorrectionq3();
 
-        $r11 = $request->query->get('r11');
-        $r12 = $request->query->get('r12');
-        $r13 = $request->query->get('r13');
-        $r21 = $request->query->get('r21');
-        $r22 = $request->query->get('r22');
-        $r23 = $request->query->get('r23');
-        $r31 = $request->query->get('r31');
-        $r32 = $request->query->get('r32');
-        $r33 = $request->query->get('r33');
+        $r1 = $request->query->get('R1');
+        $r2 = $request->query->get('R2');
+        $r3 = $request->query->get('R3');
 
-        if( $TestHistoireValid->getCorrectionq1() != $r11 && $TestHistoireValid->getCorrectionq2() == $r12 ){
-            return $this->redirectToRoute("afficherH");
+
+        if ((strcmp($c1, $r1) == 0) && (strcmp($c2, $r2) == 0) && (strcmp($c3, $r3) == 0)) {
+            $this->addFlash('success','Test valide  avec succées!');
+
+
+
+
         }
-
 
 
         $TestHistoire = new TestHistoire();

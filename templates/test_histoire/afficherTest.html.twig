@@ -10,71 +10,46 @@
                 <p class="text-uppercase">Get In Touch</p>
                 <h3 class="title-style">Contact Us</h3>
             </div>
+            <form>
+                <fieldset>
+                    <p>{{ testHistoireValide.question1 }}</p>
+                    <div>
+                        <input type="radio" id="R11" name="R1" value="{{ testHistoireValide.R11 }}">
+                        <label for="R11">{{ testHistoireValide.R11 }}</label>
+                        <input type="radio" id="R12" name="R1" value="{{ testHistoireValide.R12 }}">
+                        <label for="R12">{{ testHistoireValide.R12 }}</label>
+                        <input type="radio" id="R13" name="R1" value="{{ testHistoireValide.R13 }}">
+                        <label for="R13">{{ testHistoireValide.R13 }}</label>
+                    </div>
+                </fieldset>
 
-            <fieldset>
-                <legend>{{ testHistoireValide.question1}}</legend>
+                <fieldset>
+                    <p>{{ testHistoireValide.question2 }}</p>
+                    <div>
+                        <input type="radio" id="R21" name="R2" value="{{ testHistoireValide.R21 }}">
+                        <label for="R21">{{ testHistoireValide.R21 }}</label>
+                        <input type="radio" id="R22" name="R2" value="{{ testHistoireValide.R22 }}">
+                        <label for="R22">{{ testHistoireValide.R22 }}</label>
+                        <input type="radio" id="R23" name="R2" value="{{ testHistoireValide.R23 }}">
+                        <label for="R23">{{ testHistoireValide.R23 }}</label>
+                    </div>
+                </fieldset>
 
-                <div>
-                    <input type="radio" id="R11" name="R11" value="{{ testHistoireValide.R11 }}"
-                           checked>
-                    <label for="R11">{{ testHistoireValide.R11 }}</label>
+                <fieldset>
+                    <p>{{ testHistoireValide.question3 }}</p>
+                    <div>
+                        <input type="radio" id="R31" name="R3" value="{{ testHistoireValide.R31 }}">
+                        <label for="R31">{{ testHistoireValide.R31 }}</label>
+                        <input type="radio" id="R32" name="R3" value="{{ testHistoireValide.R32 }}">
+                        <label for="R32">{{ testHistoireValide.R32 }}</label>
+                        <input type="radio" id="R33" name="R3" value="{{ testHistoireValide.R33 }}">
+                        <label for="R33">{{ testHistoireValide.R33 }}</label>
+                    </div>
+                </fieldset>
+                <div class="text-start">
+                    <button onclick="submitAnswer()" class="btn btn-style btn-style-3">Submit</button>
                 </div>
-
-                <div>
-                    <input type="radio" id="R12" name="R12" value="{{ testHistoireValide.R12 }}">
-                    <label for="R12">{{ testHistoireValide.R12 }}</label>
-                </div>
-
-                <div>
-                    <input type="radio" id="R13" name="R13" value="{{ testHistoireValide.R13 }}">
-                    <label for="R13">{{ testHistoireValide.R13 }}</label>
-                </div>
-
-            </fieldset>
-
-            <fieldset>
-                <legend>{{ testHistoireValide.question2}}</legend>
-
-                <div>
-                    <input type="radio" id="R21" name="R21" value="{{ testHistoireValide.R21 }}"
-                           checked>
-                    <label for="R21">{{ testHistoireValide.R21 }}</label>
-                </div>
-
-                <div>
-                    <input type="radio" id="R22" name="R22" value="{{ testHistoireValide.R22 }}">
-                    <label for="R22">{{ testHistoireValide.R22 }}</label>
-                </div>
-
-                <div>
-                    <input type="radio" id="R23" name="R23" value="{{ testHistoireValide.R23 }}">
-                    <label for="R23">{{ testHistoireValide.R23 }}</label>
-                </div>
-
-            </fieldset>
-
-            <fieldset>
-                <legend>{{ testHistoireValide.question3}}</legend>
-                <div>
-                    <input type="radio" id="R31" name="R31" value="{{ testHistoireValide.R31 }}"
-                           checked>
-                    <label for="R31">{{ testHistoireValide.R31 }}</label>
-                </div>
-                <div>
-                    <input type="radio" id="R32" name="R32" value="{{ testHistoireValide.R32 }}">
-                    <label for="R32">{{ testHistoireValide.R32 }}</label>
-                </div>
-                <div>
-                    <input type="radio" id="R33" name="R33" value="{{ testHistoireValide.R33 }}">
-                    <label for="R33">{{ testHistoireValide.R33 }}</label>
-                </div>
-
-            </fieldset>
-
-
-            <div class="text-start">
-                <button onclick="submitAnswer()" class="btn btn-style btn-style-3">Submit</button>
-            </div>
+            </form>
         </div>
     </section>
 {% endblock %}

@@ -5973,6 +5973,34 @@ fieldset:disabled .btn {
   opacity: 0;
 }
 
+
+fieldset label {
+  margin-right: 15px;
+  line-height: 32px;
+}
+
+fieldset input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid #999;
+  transition: 0.2s all linear;
+  margin-right: 5px;
+
+  position: relative;
+  top: 4px;
+}
+
+fieldset input:checked {
+  border: 6px solid black;
+}
+
+
 .toast.hide {
   display: none;
 }
@@ -18143,7 +18171,7 @@ li {
 .mode-container {
   width: 24px;
   height: 24px;
-  padding: 0px 0;
+  padding: 0px;
   margin-left: 10px;
   color: var(--heading-color);
 }
@@ -19355,7 +19383,7 @@ h3.title-style {
   min-height: 100vh;
   position: relative;
   z-index: 1;
-  background: url(../images/banner.jpg) no-repeat center;
+  background: url(../images/histoires/couverture/banner.jpg) no-repeat center;
 }
 
 .w3l-banner:before {
@@ -19879,12 +19907,12 @@ ul.rating-list li a.review-color {
 }
 
 .w3l-service-1 .content23-grid1 {
-  background: url("../images/bg1.jpg") no-repeat center;
+  background: url("../images/histoires/couverture/bg1.jpg") no-repeat center;
   background-size: cover;
 }
 
 .w3l-service-1 .content23-grid2 {
-  background: url("../images/bg2.jpg") no-repeat center;
+  background: url("../images/histoires/couverture/bg2.jpg") no-repeat center;
   background-size: cover;
 }
 
@@ -20138,7 +20166,7 @@ p.count-text {
 
 /* testimonials block */
 .w3l-index4 {
-  background: url(../images/bg3.jpg) no-repeat;
+  background: url(../images/histoires/couverture/bg3.jpg) no-repeat;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -20889,7 +20917,7 @@ p.copy-footer-29 a:hover {
 
 /* inner banner */
 .inner-banner {
-  background: url(images/couverture/banner3.jpg) no-repeat center;
+  background: url(images/histoires/couverture/banner3.jpg) no-repeat center;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
