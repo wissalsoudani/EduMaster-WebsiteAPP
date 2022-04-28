@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+  
+
+
+   <div class="row">
+    {% for c in courss %}
+   <div class="col-sm-3">
+     <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <img class="card-img-top" src="uploads/{{c.contenuCours}}" alt="Image du cours">
+        <h5 class="card-title">Nom du cours: </h5> <p class="card-text">{{c.nomCours}}</p>
+        <h6 class="card-title">Nombres de pages:<p class="card-text">{{c.nbPages}}</p></h6>
+        <h6 class="card-title">Nombre de chapitres: <p class="card-text">{{c.nbChapitres}}</p></h6>
+       <a   href="{{ path('pdf',{'id_cours':c.idCours}) }}">Imprimer mon pdf</a>
+        <div class="stars">
+                    <i class="lar la-star" data-value="1"></i><i class="lar la-star" data-value="2"></i><i class="lar la-star" data-value="3"></i><i class="lar la-star" data-value="4"></i><i class="lar la-star" data-value="5"></i>
+    </div>
+                            <input type="hidden" name="note" id="note" value="0">
+        
+                              <script src="scripts.js"></script>
+                            
+                        
+      </div>
+    </div>
+     </div>
+    
+    {% endfor %}
+   
+    </div>
+                <ul class="pagination justify-content-center"> {{  knp_pagination_render(courss) }} </ul>
+
+
+
+{% endblock %}

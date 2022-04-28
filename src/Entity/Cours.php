@@ -2,7 +2,12 @@
 
 namespace App\Entity;
 
+
+
+
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * Cours
@@ -25,6 +30,7 @@ class Cours
      * @var string
      *
      * @ORM\Column(name="nom_cours", type="string", length=30, nullable=false)
+     *  @Assert\NotBlank(message="Ce champ est obligatoire")
      */
     private $nomCours;
 
@@ -32,6 +38,7 @@ class Cours
      * @var string
      *
      * @ORM\Column(name="contenu_cours", type="string", length=150, nullable=false)
+     
      */
     private $contenuCours;
 
@@ -39,6 +46,8 @@ class Cours
      * @var int
      *
      * @ORM\Column(name="nb_pages", type="integer", nullable=false)
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
+     * @Assert\GreaterThanOrEqual(1,message="le nombre de pages doit être egale a 1 ou plus")
      */
     private $nbPages;
 
@@ -46,6 +55,11 @@ class Cours
      * @var int
      *
      * @ORM\Column(name="nb_chapitres", type="integer", nullable=false)
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 5,
+     *      notInRangeMessage = "le nombre de chapitres doit être entre 1 et 5", )
      */
     private $nbChapitres;
 

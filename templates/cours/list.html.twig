@@ -1,0 +1,92 @@
+{% extends 'base-back.html.twig' %}
+
+{% block body %}
+
+<div class="sidebar-search">
+      <div class="input-group custom-search-form">
+          <input type="text" id="search" class="form-control" placeholder="Search item">
+      </div>
+      <!-- /input-group -->
+  </div>
+  <ul class="nav" id="side-menu">
+      <li>
+          <ul class="nav nav-second-level" id="entitiesNav">
+          </ul>
+      </li>
+  </ul>
+<table border="1">
+    <tr>
+        <td>Id</td>
+        <td>Nom</td>
+        <td>Contenu</td>
+        <td>Pages</td>
+        <td> Chapitres</td>
+      
+    </tr>
+    {% for c in courss %}
+        <tr>
+            <td>{{ c.idCours }}</td>
+            <td>{{  c.nomCours}}</td>
+            <td>{{ c.contenuCours }}</td>
+            <td>{{ c.nbPAges}}</td>
+            <td>{{ c.nbChapitres}}</td>
+            
+
+            <td><a href="{{ path('updateCours',{'id_cours':c.idCours}) }}">Update</a>
+            <a href="{{ path('deleteCours',{'id_cours':c.idCours}) }}">Delete</a>
+           
+           
+        </tr>
+    {% endfor %}
+</table>
+                <ul class="pagination justify-content-center"> {{ knp_pagination_render(courss) }} </ul>
+ 
+<a href="{{ path('addCours') }}">Ajouter Cours</a>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        var searchRequest = null;
+        $("#search").keyup(function() {
+            var minlength = 1;
+            var that = this;
+            var value = $(this).val();
+            var entitySelector = $("#entitiesNav").html('');
+            if (value.length >= minlength ) {
+                if (searchRequest != null)
+                    searchRequest.abort();
+                searchRequest = $.ajax({
+                    type: "GET",
+                    url: "{{ path('ajax_search') }}",
+                    data: {
+                        'q' : value
+                    },
+                    dataType: "text",
+                    success: function(msg){
+                        //we need to check if the value is the same
+                        
+                        if (value==$(that).val()) {
+                            var result = JSON.parse(msg);
+                            $.each(result, function(key, arr) {
+                                $.each(arr, function(id_cours, value) {
+                                    if (key == 'courss') {
+                                        if (id_cours != 'error') {
+                                             
+                                            console.log(id_cours , value)
+                                           entitySelector.append('<li><b>'+value[0]+'</b><a href="/detailCours/'+id_cours+'">'+'<img src="/uploads/'+value[1]+'" style="width: 50px; height: 50px"/>'+'</a></li>');
+                                                    
+                                                    
+                                        } else {  entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                        }
+                                    }
+                                });
+                            });
+                        }
+                     }
+                });
+            }
+        });
+    });
+ 
+</script>
+{% endblock %}
