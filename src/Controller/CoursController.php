@@ -16,6 +16,11 @@ use Dompdf\Options;
 use Dompdf\Image;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 class CoursController extends AbstractController
 {
@@ -213,10 +218,68 @@ public function getRealEntities($cours){
   /**
      * @Route("/detailCours/{id_cours}", name="detailCours")
      */
-    public function DetailPersonnel($id_cours)
+    public function DetailCours($id_cours)
     {
         $cours = $this->getDoctrine()->getRepository(Cours::class)->find($id_cours);
 
         return $this->render('cours/detailCours.html.twig', ["c" => $cours]);
     }
+
+ /**
+     * @Route("/listCoursJSON", name="listCoursJSON")
+     */
+    public function listcoursJSON(NormalizerInterface $Normalizer)
+    {
+        $cours= $this->getDoctrine()->getRepository(Cours::class)->findAll();
+       $serializer= new Serializer([new ObjectNormalizer()]);
+       $formatted= $Normalizer->normalize($cours, 'json',['groups'=>'post:read']);
+        return new JsonResponse($formatted);
+    }
+
+ /**
+     * @Route("/addCoursJSON/new", name="addCoursJSON")
+     */
+    public function addCoursJSON(Request $request, NormalizerInterface $Normalizer)
+    {
+        $cours = new Cours();
+
+       $cours->setNomCours($request->get('nom_cours'));
+       $cours->setContenuCours($request->get('contenu_cours'));
+       $cours->setNbPages($request->get('nb_pages'));
+       $cours->setNbChapitres($request->get('nb_chapitres'));
+
+            $em = $this->getDoctrine()->getManager();
+            
+            $em->persist($cours);
+            $em->flush();
+            $formatted= $Normalizer->normalize($cours, 'json',['groups'=>'post:read']);
+            return new JsonResponse($formatted);
+           
+        
+     
+    }
+     /**
+     * @Route("/updateCoursJSON/{id_cours}", name="updateCoursJSON")
+     */
+    public function updateCoursJSON(Request $request, NormalizerInterface $Normalizer,$id_cours)
+    {
+        $cours = $this->getDoctrine()->getRepository(Cours::class)->find($id_cours);
+
+       $cours->setNomCours($request->get('nom_cours'));
+       $cours->setContenuCours($request->get('contenu_cours'));
+       $cours->setNbPages($request->get('nb_pages'));
+       $cours->setNbChapitres($request->get('nb_chapitres'));
+
+            $em = $this->getDoctrine()->getManager();
+            
+            $em->persist($cours);
+            $em->flush();
+            $formatted= $Normalizer->normalize($cours, 'json',['groups'=>'post:read']);
+            return new JsonResponse($formatted);
+           
+        
+     
+    }
+
+
 }

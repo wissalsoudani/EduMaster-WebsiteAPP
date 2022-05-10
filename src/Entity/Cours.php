@@ -7,6 +7,7 @@ namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -23,6 +24,8 @@ class Cours
      * @ORM\Column(name="id_cours", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
+     * 
      */
     private $idCours;
 
@@ -31,6 +34,7 @@ class Cours
      *
      * @ORM\Column(name="nom_cours", type="string", length=30, nullable=false)
      *  @Assert\NotBlank(message="Ce champ est obligatoire")
+     *  @Groups("post:read")
      */
     private $nomCours;
 
@@ -38,7 +42,7 @@ class Cours
      * @var string
      *
      * @ORM\Column(name="contenu_cours", type="string", length=150, nullable=false)
-     
+     * @Groups("post:read")
      */
     private $contenuCours;
 
@@ -48,6 +52,7 @@ class Cours
      * @ORM\Column(name="nb_pages", type="integer", nullable=false)
      * @Assert\NotBlank(message="Ce champ est obligatoire")
      * @Assert\GreaterThanOrEqual(1,message="le nombre de pages doit être egale a 1 ou plus")
+     *  @Groups("post:read")
      */
     private $nbPages;
 
@@ -60,6 +65,7 @@ class Cours
      *      min = 1,
      *      max = 5,
      *      notInRangeMessage = "le nombre de chapitres doit être entre 1 et 5", )
+     *  @Groups("post:read")
      */
     private $nbChapitres;
 
