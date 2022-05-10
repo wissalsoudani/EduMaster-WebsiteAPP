@@ -1,0 +1,78 @@
+{% block body %}
+
+<div class="content">
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-12">
+<div class="card">
+<div class="card-header card-header-primary">
+    <h1 align="center" style="color:blue;">Fournisseurs</h1>
+    <h2  align="center"style="color:orange;" > List of Fournisseurs </h2>
+</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #commandes {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        #commandes td, #commandes th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        #commandes tr:nth-child(even){background-color: #f2f2f2;}
+        #commandes tr:hover {background-color: #ddd;}
+        #commandes th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: royalblue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<table id="commandes">
+
+    <tr>
+
+                 <th>Id</th>
+                <th>Code</th>
+                <th>Libelle</th>
+                <th>Responsable</th>
+                <th>Adresse</th>
+                <th>Ville</th>
+                <th>Tel</th>
+                <th>Portable</th>
+                <th>Email</th>
+                <th>Matfisc</th>
+                <th>Cin</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for fournisseur in fournisseur %}
+    <tr>
+
+                <td>{{ fournisseur.id }}</td>
+                <td>{{ fournisseur.code }}</td>
+                <td>{{ fournisseur.libelle }}</td>
+                <td>{{ fournisseur.responsable }}</td>
+                <td>{{ fournisseur.adresse }}</td>
+                <td>{{ fournisseur.ville }}</td>
+                <td>{{ fournisseur.tel }}</td>
+                <td>{{ fournisseur.portable }}</td>
+                <td>{{ fournisseur.email }}</td>
+                <td>{{ fournisseur.matfisc }}</td>
+                <td>{{ fournisseur.cin }}</td>
+
+            
+                        <script>
+    </tr>
+    
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
