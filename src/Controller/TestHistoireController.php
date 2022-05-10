@@ -39,6 +39,7 @@ class TestHistoireController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($TestHistoire);
             $em->flush();
+            $this->addFlash('success','Test ajouté avec succées!');
             return $this->redirectToRoute("afficherTestHistoire");
         }
         return $this->render("test_histoire/ajouterTestHistoire.html.twig", array("formTestHistoire" => $form->createView()));
@@ -53,13 +54,13 @@ class TestHistoireController extends AbstractController
         return $this->render("test_histoire/afficherTestHistoire.html.twig", array('Testhistoires' => $TestHistoire));
     }
 
+
     /**
      * @param $idHistoire
      * @Route ("/afficherTest/{idHistoire}",name="afficherTest")
      */
     public function afficherTest(Request $request,MailerInterface $mailer, $idHistoire)
     {
-
         $connectedUser = $this->getDoctrine()->getRepository(User::class)->find(20);
         $hiss = $this->getDoctrine()->getRepository(Histoire::class)->find($idHistoire);
 
@@ -83,6 +84,7 @@ class TestHistoireController extends AbstractController
         } else {
 
             if ((strcmp($c1, $r1) == 0) && (strcmp($c2, $r2) == 0) && (strcmp($c3, $r3) == 0)) {
+                //Notif
                 $this->addFlash('success', 'Test valide  avec succées!');
                 $connectedUser->setScore($connectedUser->getScore() + 10);
                 $em = $this->getDoctrine()->getManager();
@@ -111,6 +113,7 @@ class TestHistoireController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->remove($TestHistoire);
         $em->flush();
+        $this->addFlash('success','test supprimé avec succées!');
         return $this->redirectToRoute("afficherTestHistoire");
     }
 
@@ -125,6 +128,7 @@ class TestHistoireController extends AbstractController
         if ($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
             $em->flush();
+            $this->addFlash('success','test modifié avec succées!');
             return $this->redirectToRoute("afficherTestHistoire");
         }
         return $this->render("test_histoire/modifierTestHistoire.html.twig", array('formTestHistoire' => $form->createView()));

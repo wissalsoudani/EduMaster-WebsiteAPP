@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Flash;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class HistoireController extends AbstractController
 {
@@ -37,7 +38,6 @@ class HistoireController extends AbstractController
              * @var UploadedFile $file
              * @var UploadedFile $pdf
              */
-
             $file = $form['couvertureHistoire']->getData();
             $pdf= $form['contenuHistoire']->getData();
 
@@ -64,7 +64,7 @@ class HistoireController extends AbstractController
 
         $histoire=$this->getDoctrine()->getRepository(Histoire::class)->findAll();
         $em=$this->getDoctrine()->getManager();
-
+        //Search by Ajax
         if ($request->isXmlHttpRequest()) {
             $search  = $request->get('search');
             dump($search);
@@ -82,12 +82,25 @@ class HistoireController extends AbstractController
         return $this->render("histoire/afficherHistoire.html.twig",array('histoires'=>$histoire));
     }
 
+
+    /**
+     * @Route("/AllHistoires", name="AllHistoires", methods={"GET","POST"})
+     */
+    public function AllHistoires(NormalizerInterface $Normalizer){
+        $repository=$this->getDoctrine()->getRepository(Histoire::class);
+        $histoire=$repository->findAll();
+        $jsonContent = $Normalizer->normalize($histoire, 'json', ['groups'=>'post:read']);
+       return $this->render('histoire/AllHistoireJSON.html.twig', [
+           'data'=>$jsonContent,
+       ]);
+    }
+
+
     public function rechercheAjaxAction(Request $request)
     {
 
-
-
     }
+
     /**
      * @param $id
      * @Route ("/afficherDetailsHistoire/{id}",name="afficherDetailsHistoire")
