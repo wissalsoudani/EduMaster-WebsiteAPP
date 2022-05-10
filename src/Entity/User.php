@@ -2,156 +2,68 @@
 
 namespace App\Entity;
 
+use App\Repository\UserRepository;
+use App\Repository\UserSecurityRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 /**
- * User
- *
- * @ORM\Table(name="user")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User
+class User implements UserInterface
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_user", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
-    private $idUser;
-
+    private $id_user;
+ 
     /**
-     * @var int|null
-     *
-     * @ORM\Column(name="id_abonnement", type="integer", nullable=true, options={"default"="NULL"})
-     */
-    private $idAbonnement = NULL;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="login", type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $login;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="mdp", type="string", length=50, nullable=false)
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
      */
     private $mdp;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nom", type="string", length=15, nullable=false)
+      /**
+     * @ORM\Column(type="string", length=180)
      */
     private $nom;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="prenom", type="string", length=15, nullable=false)
+     /**
+     * @ORM\Column(type="string", length=180)
      */
-    private $prenom;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="niveau", type="integer", nullable=false)
+    private $prenom; 
+     /**
+     * @ORM\Column(type="string", length=60)
+     */
+    private $mail;
+      /**
+     * @ORM\Column(type="integer", length=11)
      */
     private $niveau;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="mail", type="string", length=50, nullable=false)
-     */
-    private $mail;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="code", type="text", length=65535, nullable=true, options={"default"="NULL"})
-     */
-    private $code = 'NULL';
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="etat", type="string", length=10, nullable=true, options={"default"="NULL"})
-     */
-    private $etat = 'NULL';
-
-    public function getIdUser(): ?int
+    public function getNiveau(): ?int
     {
-        return $this->idUser;
+        return $this->niveau;
     }
-
-    public function getIdAbonnement(): ?int
+    public function getId(): ?int
     {
-        return $this->idAbonnement;
-    }
-
-    public function setIdAbonnement(?int $idAbonnement): self
-    {
-        $this->idAbonnement = $idAbonnement;
-
-        return $this;
+        return $this->id_user;
     }
 
     public function getLogin(): ?string
     {
         return $this->login;
-    }
-
-    public function setLogin(string $login): self
-    {
-        $this->login = $login;
-
-        return $this;
-    }
-
-    public function getMdp(): ?string
-    {
-        return $this->mdp;
-    }
-
-    public function setMdp(string $mdp): self
-    {
-        $this->mdp = $mdp;
-
-        return $this;
-    }
-
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(string $nom): self
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): self
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    public function getNiveau(): ?int
-    {
-        return $this->niveau;
     }
 
     public function setNiveau(int $niveau): self
@@ -161,41 +73,116 @@ class User
         return $this;
     }
 
-    public function getMail(): ?string
+    public function setLogin(string $login): self
+    {
+        $this->login = $login;
+
+        return $this;
+    }
+    public function setNom(string $nom): self
+    {
+        $this->nom= $nom;
+
+        return $this;
+    }
+    public function getNom(): ?string 
+    {
+        return $this->nom;
+    }
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom= $prenom;
+
+        return $this;
+    }
+    public function getprenom(): ?string 
+    {
+        return $this->prenom;
+    }
+    public function setmail(string $mail): self
+    {
+        $this->mail= $mail;
+
+        return $this;
+    }
+    public function getMail(): ?string 
     {
         return $this->mail;
     }
 
-    public function setMail(string $mail): self
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
     {
-        $this->mail = $mail;
+        return (string) $this->login;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }
 
-    public function getCode(): ?string
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): ?string
     {
-        return $this->code;
+        return $this->mdp;
     }
 
-    public function setCode(?string $code): self
+    public function setPassword(string $mdp): self
     {
-        $this->code = $code;
+        $this->mdp = $mdp;
 
         return $this;
     }
 
-    public function getEtat(): ?string
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
     {
-        return $this->etat;
+        return null;
     }
 
-    public function setEtat(?string $etat): self
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
     {
-        $this->etat = $etat;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function getAbonnement(): ?Abonnement
+    {
+        return $this->idAbonnement;
+    }
+
+    public function setAbonnement(Abonnement $idAbonnement): self
+    {
+        $this->idAbonnement = $idAbonnement;
 
         return $this;
     }
-
-
 }
