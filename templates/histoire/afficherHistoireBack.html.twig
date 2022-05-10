@@ -1,0 +1,52 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Hello TestController!{% endblock %}
+
+{% block body %}
+    <section class="section">
+        <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Default Table</h5>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Age</th>
+                                <th scope="col">Langue</th>
+                                <th scope="col">Nom Histoire</th>
+                                <th scope="col">Contenu</th>
+                                <th scope="col">Couverture</th>
+                                <th scope="col">Categorie</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for i in histoires %}
+
+                            <tr>
+                                <th scope="row">{{ i.idHistoire }}</th>
+                                <td>{{ i.age }}</td>
+                                <td>{{ i.langue}}</td>
+                                <td>{{ i.nomHistoire }}</td>
+                                <td>{{ i.contenuHistoire }}</td>
+                                <td>{{ i.couvertureHistoire }}</td>
+                                <td>{{ i.categorie }}</td>
+                                <td>
+                                    <a href="{{ path('supprimerHistoire',{'id':i.idHistoire}) }}">
+                                        Supprimer
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('modifierHistoire',{'id':i.idHistoire}) }}">Modifier</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <!-- End Default Table Example -->
+                    </div>
+                </div>
+
+
+
+{% endblock %}

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Articles
@@ -13,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Articles
 {
     /**
+     * @Groups("articles")
      * @var int
      *
      * @ORM\Column(name="id_articles", type="integer", nullable=false)
@@ -22,6 +25,7 @@ class Articles
     private $idArticles;
 
     /**
+     * @Groups("articles")
      * @var string
      *
      * @ORM\Column(name="date_article", type="string", length=255, nullable=false)
@@ -29,6 +33,7 @@ class Articles
     private $dateArticle;
 
     /**
+     * @Groups("articles")
      * @var int
      *
      * @ORM\Column(name="nombre_like", type="integer", nullable=false)
@@ -36,6 +41,7 @@ class Articles
     private $nombreLike;
 
     /**
+     * @Groups("articles")
      * @var int
      *
      * @ORM\Column(name="nombre_commentaire", type="integer", nullable=false)
@@ -43,18 +49,33 @@ class Articles
     private $nombreCommentaire;
 
     /**
+     * @Groups("articles")
      * @var string
      *
      * @ORM\Column(name="titre", type="string", length=256, nullable=false)
+     * @Assert\Regex(
+     *     pattern     = "/^[a-z]+$/i",
+     *     htmlPattern = "[a-zA-Z]+"
+     * )
+     * @Assert\NotBlank
      */
+
     private $titre;
 
     /**
+     * @Groups("articles")
      * @var string
      *
      * @ORM\Column(name="contenu", type="text", length=65535, nullable=false)
      */
     private $contenu;
+
+    /**
+     * @Groups("articles_activites")
+     * @ORM\ManyToOne(targetEntity=Activites::class, inversedBy="articles")
+     * @ORM\JoinColumn(name="idActivites", referencedColumnName="id_activites")
+     */
+    private $activite;
 
     public function getIdArticles(): ?int
     {
@@ -117,6 +138,18 @@ class Articles
     public function setContenu(string $contenu): self
     {
         $this->contenu = $contenu;
+
+        return $this;
+    }
+
+    public function getActivite(): ?Activites
+    {
+        return $this->activite;
+    }
+
+    public function setActivite(?Activites $activite): self
+    {
+        $this->activite = $activite;
 
         return $this;
     }

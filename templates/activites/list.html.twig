@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="w3l-grids-block-5 home-course-bg py-5" id="courses">
+        <div class="container py-md-5 py-4">
+            <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
+                <p class="text-uppercase">les activités</p>
+                <h3 class="title-style">choisir la meilleure activité pour vous</h3>
+            </div>
+            <div class="row justify-content-center">
+                {% for activite in activites %}
+        
+                <div class="col-lg-4 col-md-6">
+                    <div class="coursecard-single">
+                        <div class="grids5-info position-relative">
+                            <img src="{{ vich_uploader_asset(activite, 'imageFile') }}" alt="" class="img-fluid" />
+                           <div class="meta-list">
+                                <a href="courses.html" class="sec-3">{{activite.typeActivite}}</a>
+                            </div>
+                        </div>
+                        <div class="content-main-top">
+                            <div class="content-top mb-4 mt-3">
+                                <ul class="list-unstyled d-flex align-items-center justify-content-between">
+                                    <li> <i class="fas fa-book-open"></i>{{activite.lieu}}</li>
+                                    <li> <i class="fas fa-star"></i> </li>
+                                </ul>
+                            </div>
+                            <h4><a href="courses.html">{{activite.titre}}</a></h4>
+                            <p>{{activite.description}}</p>
+                            <div class="top-content-border d-flex align-items-center justify-content-between mt-4 pt-4">
+                                <h6>{{activite.prixActivite}}</h6>
+                                <a class="btn btn-style-primary" href="{{path('liste_articles_front',{'id':activite.idActivites})}}">voir les Articles
+                                <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+                
+                
+            </div>
+           
+        </div>
+    </div>
+{% endblock %}
