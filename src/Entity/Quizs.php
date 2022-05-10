@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Quizs
@@ -19,6 +20,8 @@ class Quizs
      * @ORM\Column(name="id_quizs", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+          * @Groups("posts:read")
+
      */
     private $idQuizs;
 
@@ -27,6 +30,7 @@ class Quizs
      *
      * @ORM\Column(name="image", type="string", length=250, nullable=false)
          * @Assert\NotBlank(message="Image est obligatoire")
+     * @Groups("posts:read")
 
      */
     private $image;
@@ -36,6 +40,7 @@ class Quizs
      *
      * @ORM\Column(name="matiere", type="string", length=30, nullable=false)
          * @Assert\NotBlank(message="Matiere est obligatoire")
+     * @Groups("posts:read")
 
      */
     private $matiere;
@@ -45,6 +50,7 @@ class Quizs
      *
      * @ORM\Column(name="difficulte", type="string", length=30, nullable=false)
               * @Assert\NotBlank(message="Difficulté est obligatoire")
+     * @Groups("posts:read")
 
      */
     private $difficulte;
@@ -54,6 +60,7 @@ class Quizs
      *
      * @ORM\Column(name="resultat", type="integer", nullable=false)
                    * @Assert\NotBlank(message="Resultat est obligatoire")
+     * @Groups("posts:read")
 
      */
     private $resultat;

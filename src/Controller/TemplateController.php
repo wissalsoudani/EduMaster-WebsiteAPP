@@ -20,6 +20,7 @@ class TemplateController extends AbstractController
     {
         return $this->render('template/index2.html.twig', [
             'controller_name' => 'TemplateController',
+            
             'Quiz' => $quizrepo->createQueryBuilder('u')->select('u')->getQuery()->getResult(),
             'Question' => $questionrepo->createQueryBuilder('u')->select('u')->getQuery()->getResult()
 

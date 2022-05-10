@@ -8,6 +8,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\QuizRepo;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
+
+
 
 /**
  * @Route("/quizs")
@@ -135,4 +142,170 @@ class QuizsController extends AbstractController
 
         return $this->redirectToRoute('quizs_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-----------------------Stat-----------------------------//
+
+ /**
+     * @Route("/e/statquiz", name="statquiz", methods={"GET"})
+     */
+    public function reclamation_stat(QuizRepo $rhrepo): Response
+    {
+        $nbrs[]=Array();
+
+        $e1=$rhrepo->find_Nb_Rec_Par_Status("Facile");
+        $nbrs[]=$e1[0][1];
+
+
+        $e2=$rhrepo->find_Nb_Rec_Par_Status("Difficile");
+       
+        $nbrs[]=$e2[0][1];
+
+/*
+        $e3=$activiteRepository->find_Nb_Rec_Par_Status("Diffence");
+        dump($e3);
+        $nbrs[]=$e3[0][1];
+*/
+
+        dump($nbrs);
+        reset($nbrs);
+        dump(reset($nbrs));
+        $key = key($nbrs);
+        dump($key);
+        dump($nbrs[$key]);
+
+        unset($nbrs[$key]);
+
+        $nbrss=array_values($nbrs);
+        dump(json_encode($nbrss));
+
+        return $this->render('quizs/stat.html.twig', [
+            'nbr' => json_encode($nbrss),
+        ]);
+    }
+
+
+/////// tri et recherche /////
+
+
+    /**
+     * @Route("/r/search_quizs", name="search_quizs", methods={"GET"})
+     */
+    public function search_usere(Request $request,NormalizerInterface $Normalizer,QuizRepo $qrepo ): Response
+    {
+//tekhou valeur eli ktebtha//
+        $requestString=$request->get('searchValue');
+        $requestString3=$request->get('orderid');
+        
+        $user = $qrepo->findUser($requestString,$requestString3);
+        
+        $jsoncontentc =$Normalizer->normalize($user,'json',['groups'=>'posts:read']);
+      
+        $jsonc=json_encode($jsoncontentc);
+       
+        if(  $jsonc == "[]" ) { return new Response(null); }
+        else{ return new Response($jsonc); }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function getData() :array
+    {
+        /**
+         * @var $Quuuizs qui[]
+         */
+        $list = [];
+
+        $Quuuizs = $this->getDoctrine()->getRepository(Quizs::class)->findAll();
+
+        foreach ($Quuuizs as $qui) {
+            $list[] = [
+                $qui->getIdQuizs(),
+                $qui->getMatiere(),
+                $qui->getDifficulte(),
+                $qui->getResultat(),
+        
+
+            ];
+        }
+        return $list;
+    }
+
+
+    /**
+     * @Route("/excel/export",  name="export")
+     */
+    public function export()
+    {
+        $spreadsheet = new Spreadsheet();
+
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setTitle('Quizs');
+
+        $sheet->getCell('A1')->setValue('idQuizs');
+        $sheet->getCell('B1')->setValue('matiere');
+        $sheet->getCell('C1')->setValue('difficulte');
+        $sheet->getCell('D1')->setValue('resultat');
+       
+
+
+        // Increase row cursor after header write
+        $sheet->fromArray($this->getData(),null, 'A2', true);
+        $writer = new Xlsx($spreadsheet);
+        // $writer->save('ss.xlsx');
+        $writer->save('Quizs'.date('m-d-Y_his').'.xlsx');
+        return $this->redirectToRoute('quizs_index');
+                    
+    }
+
+
+
+
+
+
+
+
+
 }
