@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Articles
  *
@@ -46,7 +46,13 @@ class Articles
      * @var string
      *
      * @ORM\Column(name="titre", type="string", length=256, nullable=false)
+     * @Assert\Regex(
+     *     pattern     = "/^[a-z]+$/i",
+     *     htmlPattern = "[a-zA-Z]+"
+     * )
+     * @Assert\NotBlank
      */
+
     private $titre;
 
     /**
@@ -55,6 +61,12 @@ class Articles
      * @ORM\Column(name="contenu", type="text", length=65535, nullable=false)
      */
     private $contenu;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Activites::class, inversedBy="articles")
+     * @ORM\JoinColumn(name="idActivites", referencedColumnName="id_activites")
+     */
+    private $activite;
 
     public function getIdArticles(): ?int
     {
@@ -117,6 +129,18 @@ class Articles
     public function setContenu(string $contenu): self
     {
         $this->contenu = $contenu;
+
+        return $this;
+    }
+
+    public function getActivite(): ?Activites
+    {
+        return $this->activite;
+    }
+
+    public function setActivite(?Activites $activite): self
+    {
+        $this->activite = $activite;
 
         return $this;
     }

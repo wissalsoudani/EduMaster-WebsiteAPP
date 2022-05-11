@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TestHistoire{% endblock %}
+
+{% block body %}
+
+    <section class="w3l-contact py-5" id="contact">
+        <div class="container py-md-5 py-4">
+            <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
+                <p class="text-uppercase">TEST DE L'HISTOIRE :  </p>
+                <h3 class="title-style">{{ histoire.nomHistoire}}</h3>
+            </div>
+            <form>
+                <fieldset>
+                    <p>{{ testHistoireValide.question1 }}</p>
+                    <div>
+                        <input type="radio" id="R11" name="R1" value="{{ testHistoireValide.R11 }}">
+                        <label for="R11">{{ testHistoireValide.R11 }}</label>
+                        <input type="radio" id="R12" name="R1" value="{{ testHistoireValide.R12 }}">
+                        <label for="R12">{{ testHistoireValide.R12 }}</label>
+                        <input type="radio" id="R13" name="R1" value="{{ testHistoireValide.R13 }}">
+                        <label for="R13">{{ testHistoireValide.R13 }}</label>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <p>{{ testHistoireValide.question2 }}</p>
+                    <div>
+                        <input type="radio" id="R21" name="R2" value="{{ testHistoireValide.R21 }}">
+                        <label for="R21">{{ testHistoireValide.R21 }}</label>
+                        <input type="radio" id="R22" name="R2" value="{{ testHistoireValide.R22 }}">
+                        <label for="R22">{{ testHistoireValide.R22 }}</label>
+                        <input type="radio" id="R23" name="R2" value="{{ testHistoireValide.R23 }}">
+                        <label for="R23">{{ testHistoireValide.R23 }}</label>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <p>{{ testHistoireValide.question3 }}</p>
+                    <div>
+                        <input type="radio" id="R31" name="R3" value="{{ testHistoireValide.R31 }}">
+                        <label for="R31">{{ testHistoireValide.R31 }}</label>
+                        <input type="radio" id="R32" name="R3" value="{{ testHistoireValide.R32 }}">
+                        <label for="R32">{{ testHistoireValide.R32 }}</label>
+                        <input type="radio" id="R33" name="R3" value="{{ testHistoireValide.R33 }}">
+                        <label for="R33">{{ testHistoireValide.R33 }}</label>
+                    </div>
+                </fieldset>
+                <div class="text-start">
+                    <button onclick="submitAnswer()" class="btn btn-style btn-style-3">Submit</button>
+                </div>
+            </form>
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
+
+
+

@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Serializer\Annotation\Groups;
+
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Admin
  *
  * @ORM\Table(name="admin")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\AdminRepository")
  */
 class Admin
 {
@@ -18,6 +21,8 @@ class Admin
      * @ORM\Column(name="id_admin", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
+
      */
     private $idAdmin;
 
@@ -25,6 +30,7 @@ class Admin
      * @var int|null
      *
      * @ORM\Column(name="id_abonnement", type="integer", nullable=true, options={"default"="NULL"})
+     * @Groups("post:read")
      */
     private $idAbonnement = NULL;
 
@@ -32,6 +38,7 @@ class Admin
      * @var string
      *
      * @ORM\Column(name="login", type="string", length=10, nullable=false)
+     * @Groups("post:read")
      */
     private $login;
 
@@ -39,6 +46,7 @@ class Admin
      * @var string
      *
      * @ORM\Column(name="mdp", type="string", length=50, nullable=false)
+     * @Groups("post:read")
      */
     private $mdp;
 
@@ -46,6 +54,7 @@ class Admin
      * @var string|null
      *
      * @ORM\Column(name="nom", type="text", length=65535, nullable=true, options={"default"="NULL"})
+     * @Groups("post:read")
      */
     private $nom = 'NULL';
 
@@ -53,6 +62,7 @@ class Admin
      * @var string|null
      *
      * @ORM\Column(name="prenom", type="text", length=65535, nullable=true, options={"default"="NULL"})
+     * @Groups("post:read")
      */
     private $prenom = 'NULL';
 
@@ -60,6 +70,7 @@ class Admin
      * @var string|null
      *
      * @ORM\Column(name="niveau", type="text", length=65535, nullable=true, options={"default"="NULL"})
+     * @Groups("post:read")
      */
     private $niveau = 'NULL';
 
@@ -67,6 +78,7 @@ class Admin
      * @var string
      *
      * @ORM\Column(name="mail", type="string", length=20, nullable=false)
+     * @Groups("post:read")
      */
     private $mail;
 

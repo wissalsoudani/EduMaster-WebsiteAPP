@@ -1,0 +1,73 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Articles{% endblock %}
+{% block body %}
+    <h1>Liste des Articles</h1>
+    <a href="{{ path('add_article') }}">
+        <button type="button" class="btn btn-success">Create</button>
+    </a>
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
+
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    </style>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('alert') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="example-wrapper">
+        <table id="myTable" class="display">
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Date</th>
+                <th>Nombre Commentaire</th>
+                <th>Nombre Like</th>
+                <th>Activites</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for ar in articles %}
+                <tr>
+                    <td>{{ ar.titre }}</td>
+                    <td>{{ ar.dateArticle|date("m/d/Y") }}</td>
+                    <td>{{ ar.nombreCommentaire }}</td>
+                    <td>{{ ar.nombreLike }}</td>
+                    <td>{{ ar.activite.titre }}</td>
+                    <td><a href="{{ path('update_article',{'article':ar.idArticles}) }}">
+                            <button type="button" class="btn btn-secondary">Update</button>
+                        </a>
+                        <a href="{{ path('delete_articles',{'article':ar.idArticles}) }}">
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block js %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+
+{% endblock %}

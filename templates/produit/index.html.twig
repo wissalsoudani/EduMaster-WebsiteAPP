@@ -1,0 +1,52 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}produits!{% endblock %}
+
+{% block body %}
+    <h1>Produit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Pa</th>
+                <th>Pv</th>
+                <th>Tva</th>
+                <th>Stock</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr>
+                <td>{{ produit.id }}</td>
+                <td>{{ produit.libelle }}</td>
+                <td>{{ produit.pa }}</td>
+                <td>{{ produit.pv }}</td>
+                <td>{{ produit.tva }}</td>
+                <td>{{ produit.stock }}</td>
+                <td><img src="{{ asset('uploads/images/' ~ produit.image) }}" alt="" style="width: 50px;height: 50px"> </td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('produit_show', {'id': produit.id}) }}">show</a>
+                    <a class="btn btn-primary" href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('produit_new') }}">Create new</a>
+
+{% endblock %}
+
+
+
+
+
+

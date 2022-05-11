@@ -1,0 +1,48 @@
+
+{% block body %}
+<h2 align = "center">Liste des utilisateurs</h2>
+
+<div class="card card-info" >
+     <div class="card-header">
+
+       <div class="card-tools">
+           <i class="fas fa-minus"></i>
+         </button>
+       </div>
+     </div>
+     <div class="card-body p-0">
+
+<table class="table table-bordered table-dark">
+ <thead>
+     <tr>
+         <th>ID users</th>  &nbsp  &nbsp
+         <th>Logins</th>  
+         <th>Niveaux</th>  
+         <th>Nom de Famille</th>  
+         <th>Prénom</th>
+        
+
+     </tr>
+ </thead>
+ <tbody>
+ {% for user in users %}
+     <tr>
+         <td>{{ user.id }}</td>
+           
+         <td>{{ user.login }}</td>
+           &nbsp
+         <td>{{ user.niveau }}</td>
+           &nbsp
+         <td>{{ user.nom }}</td>
+           &nbsp
+         <td>{{ user.prenom }}</td>
+       
+         
+     </tr>
+     <br>
+ 
+ {% endfor %}
+ </tbody>
+</table>
+
+{% endblock %}

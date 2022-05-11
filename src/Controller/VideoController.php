@@ -72,7 +72,7 @@ class VideoController extends AbstractController
     {
         $videos = $this->getDoctrine()->getRepository(Video::class)->find($id_video);
         $em = $this->getDoctrine()->getManager();
-        $em->remove($video);
+        $em->remove($videos);
         $em->flush();
         return $this->redirectToRoute("listVideos");
     }

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Abonnement
  *
  * @ORM\Table(name="abonnement")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\AbonnementRepository")
  */
 class Abonnement
 {
@@ -36,6 +36,10 @@ class Abonnement
     private $type;
 
     public function getIdAbonnement(): ?int
+    {
+        return $this->idAbonnement;
+    }
+    public function setIdAbonnement(): ?self
     {
         return $this->idAbonnement;
     }

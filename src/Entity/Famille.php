@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups ;
+
 
 /**
  * Famille
@@ -18,6 +20,8 @@ class Famille
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+               * @Groups({"famille"})
+
      */
     private $id;
 
@@ -25,15 +29,10 @@ class Famille
      * @var string
      *
      * @ORM\Column(name="libelle", type="string", length=50, nullable=false)
+               * @Groups({"famille"})
+
      */
     private $libelle;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Produits", type="string", length=50, nullable=false)
-     */
-    private $produits;
 
     public function getId(): ?int
     {
@@ -48,18 +47,6 @@ class Famille
     public function setLibelle(string $libelle): self
     {
         $this->libelle = $libelle;
-
-        return $this;
-    }
-
-    public function getProduits(): ?string
-    {
-        return $this->produits;
-    }
-
-    public function setProduits(string $produits): self
-    {
-        $this->produits = $produits;
 
         return $this;
     }

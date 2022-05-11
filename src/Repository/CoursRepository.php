@@ -47,6 +47,11 @@ class CoursRepository extends ServiceEntityRepository
         ;
     }
     */
-  
+    public function findEntitiesByString($str)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT c FROM App:Cours c WHERE c.nomCours LIKE :str' )
+            ->setParameter('str', '%'.$str.'%')->getResult();
+    }
 
 }

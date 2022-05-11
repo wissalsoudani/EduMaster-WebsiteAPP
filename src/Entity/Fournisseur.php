@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Fournisseur
@@ -16,7 +17,7 @@ class Fournisseur
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id 
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -25,13 +26,16 @@ class Fournisseur
      * @var string
      *
      * @ORM\Column(name="code", type="string", length=50, nullable=false)
+    * @Assert\NotBlank(message="Code est obligatoire")
      */
     private $code;
 
-    /**
+    /** 
      * @var string
      *
      * @ORM\Column(name="libelle", type="string", length=50, nullable=false)
+     * @Assert\NotBlank(message="libelle est obligatoire")
+
      */
     private $libelle;
 
@@ -39,6 +43,8 @@ class Fournisseur
      * @var string
      *
      * @ORM\Column(name="responsable", type="string", length=50, nullable=false)
+         * @Assert\NotBlank(message="responsable est obligatoire")
+
      */
     private $responsable;
 
@@ -46,6 +52,8 @@ class Fournisseur
      * @var string
      *
      * @ORM\Column(name="adresse", type="string", length=50, nullable=false)
+         * @Assert\NotBlank(message="adresse est obligatoire")
+
      */
     private $adresse;
 
@@ -53,6 +61,8 @@ class Fournisseur
      * @var string
      *
      * @ORM\Column(name="ville", type="string", length=50, nullable=false)
+         * @Assert\NotBlank(message="ville est obligatoire")
+
      */
     private $ville;
 
@@ -60,6 +70,8 @@ class Fournisseur
      * @var string
      *
      * @ORM\Column(name="tel", type="string", length=50, nullable=false)
+         * @Assert\NotBlank(message="tel est obligatoire")
+
      */
     private $tel;
 
@@ -67,6 +79,8 @@ class Fournisseur
      * @var string
      *
      * @ORM\Column(name="portable", type="string", length=50, nullable=false)
+         * @Assert\NotBlank(message="portable est obligatoire")
+
      */
     private $portable;
 
@@ -74,6 +88,8 @@ class Fournisseur
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=50, nullable=false)
+         * @Assert\NotBlank(message="email est obligatoire")
+
      */
     private $email;
 
@@ -81,6 +97,8 @@ class Fournisseur
      * @var string
      *
      * @ORM\Column(name="matfisc", type="string", length=50, nullable=false)
+         * @Assert\NotBlank(message="matfisc est obligatoire")
+
      */
     private $matfisc;
 
@@ -88,6 +106,8 @@ class Fournisseur
      * @var string
      *
      * @ORM\Column(name="cin", type="string", length=50, nullable=false)
+              * @Assert\NotBlank(message="cin est obligatoire")
+
      */
     private $cin;
 
@@ -203,6 +223,8 @@ class Fournisseur
 
         return $this;
     }
+
+    
 
     public function getCin(): ?string
     {

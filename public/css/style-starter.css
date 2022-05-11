@@ -11869,6 +11869,10 @@ button:hover {
   clear: both;
 }
 
+input[type="radio"]{
+  -webkit-appearance: radio;
+}
+
 .img-responsive {
   max-width: 100%;
   display: block;

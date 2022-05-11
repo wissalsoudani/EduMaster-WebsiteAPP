@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+ 
 
 /**
  * Histoire
@@ -18,6 +20,7 @@ class Histoire
      * @ORM\Column(name="id_histoire", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $idHistoire;
 
@@ -39,6 +42,7 @@ class Histoire
      * @var string
      *
      * @ORM\Column(name="nom_histoire", type="string", length=255, nullable=false)
+     * @Groups("post:read")
      */
     private $nomHistoire;
 
@@ -53,6 +57,8 @@ class Histoire
      * @var string
      *
      * @ORM\Column(name="couverture_histoire", type="string", length=255, nullable=false)
+     * @Groups("post:read")
+
      */
     private $couvertureHistoire;
 
@@ -61,7 +67,7 @@ class Histoire
      *
      * @ORM\Column(name="catégorie", type="string", length=255, nullable=false)
      */
-    private $catégorie;
+    private $categorie;
 
     public function getIdHistoire(): ?int
     {
@@ -128,14 +134,14 @@ class Histoire
         return $this;
     }
 
-    public function getCatégorie(): ?string
+    public function getCategorie(): ?string
     {
-        return $this->catégorie;
+        return $this->categorie;
     }
 
-    public function setCatégorie(string $catégorie): self
+    public function setCategorie(string $categorie): self
     {
-        $this->catégorie = $catégorie;
+        $this->categorie = $categorie;
 
         return $this;
     }

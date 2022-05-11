@@ -1,0 +1,45 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Hello TestController!{% endblock %}
+{% block body %}
+
+
+    {{ form_start(formHistoire,{'attr':{'novalidate':'novalidate'}}) }}
+
+    <h1> Ajouter une Histoire </h1>
+    <div class="row mb-3">
+
+        {{ form_label(formHistoire.age,"Age") }}
+        {{ form_widget(formHistoire.age) }}
+        {{ form_errors(formHistoire.age) }}
+
+
+        {{ form_label(formHistoire.langue,"langue") }}
+        {{ form_widget(formHistoire.langue) }}
+        {{ form_errors(formHistoire.langue) }}
+
+
+        {{ form_label(formHistoire.nomHistoire,"Nom de l'histoire") }}
+        {{ form_widget(formHistoire.nomHistoire) }}
+        {{ form_errors(formHistoire.nomHistoire) }}
+
+
+        {{ form_label(formHistoire.couvertureHistoire,"Couverture Histoire") }}
+        {{ form_widget(formHistoire.couvertureHistoire,{'attr':{'class':'form-control'}}) }}
+        {{ form_errors(formHistoire.couvertureHistoire) }}
+
+
+        {{ form_label(formHistoire.contenuHistoire,"contenu de l'histoire") }}
+        {{ form_widget(formHistoire.contenuHistoire,{'attr':{'class':'form-control'}}) }}
+        {{ form_errors(formHistoire.contenuHistoire) }}
+
+        {{ form_label(formHistoire.categorie,"Categorie de l'histoire") }}
+        {{ form_widget(formHistoire.categorie) }}
+        {{ form_errors(formHistoire.categorie) }}
+
+
+    </div>
+    {{ form_end(formHistoire) }}
+
+
+{% endblock %}

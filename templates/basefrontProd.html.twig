@@ -1,0 +1,79 @@
+{% extends 'base-back.html.twig' %}
+{% block title %}produits!{% endblock %}
+
+
+{% block body %}
+
+<div class="w3l-grids-block-5 home-course-bg py-5" id="courses">
+    <div class="container py-md-5 py-4">
+        <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
+            <p class="text-uppercase">Our Products</p>
+            <h3 class="title-style">Find The Right Product For You</h3>
+        </div>
+
+        <div class="row justify-content-center">
+
+            {% for qu in Produit %}
+
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="coursecard-single">
+                        <div class="grids5-info position-relative">
+
+                       <img src="{{ asset('uploads/images/' ~ qu.image) }}" alt="" class="img-fluid" />
+ 
+                            <div class="meta-list">
+                                <a href="{{asset('front/courses.html')}}">Product & Product</a>
+                            </div>
+                        </div>
+                        <div class="content-main-top">
+                            <div class="content-top mb-4 mt-3">
+                                <ul class="list-unstyled d-flex align-items-center justify-content-between">
+                                   <!-- <li> <i class="fas fa-book-open"></i> 43 Lesson</li>-->
+                                   <!--  <li> <i class="fas fa-star"></i> 4.5</li>-->
+                                </ul>
+                            </div>
+                            <h4><a href="{{asset('front/courses.html')}}">{{qu.libelle}}</a></h4>
+                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="top-content-border d-flex align-items-center justify-content-between mt-4 pt-4">
+                                <h6>${{qu.pa}}</h6>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+        
+                        {% endfor %}
+
+                        <div class="w3l-blog-block-5 py-5" id="blog">
+                            <div class="container py-md-5 py-4">
+                                <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
+                                    <p class="text-uppercase">Our News</p>
+                                    <h3 class="title-style">Nos  <span>Quizs</span> Postés</h3>
+                                </div>
+                                <div class="row justify-content-center">
+
+            {% for qu in Quizs  %}
+              
+            <div class="col-lg-4 col-md-6 mt-md-0 mt-4">
+                <div class="blog-card-single">
+                    <div class="grids5-info">
+                        <a href="#blog"><img src="{{asset('uploads/images/' ~ qu.image) }}" alt="" /></a>
+                        <div class="blog-info">
+                            <h4><a href="#blog">{{qu.matiere}}</a></h4>
+                            <p>{{qu.difficulte}}</p>
+                            <div class="d-flex align-items-center justify-content-between mt-4">
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                               {% endfor %}
+
+                        {% endblock %}

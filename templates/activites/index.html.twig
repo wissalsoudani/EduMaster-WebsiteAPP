@@ -1,0 +1,60 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Activites{% endblock %}
+{% block body %}
+    <h1>Listes Activites</h1>
+    <a href="{{ path('add_activites') }}">
+        <button type="button" class="btn btn-success">Create</button>
+    </a>
+
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('alert') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="example-wrapper">
+        <table id="myTable" class="display">
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Date</th>
+                <th>Prix</th>
+                <th>Lieu</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for ac in activites  %}
+            <tr>
+                <td>{{ ac.titre }}</td>
+                <td>{{ ac.dateActivite|date("m/d/Y") }}</td>
+                <td>{{ ac.prixActivite }}</td>
+                <td>{{ ac.lieu }}</td>
+                <td><a href="{{ path('update_activites',{'activite':ac.idActivites}) }}"><button type="button" class="btn btn-secondary">Update</button></a>
+                    <a href="{{ path('delete_activites',{'activite':ac.idActivites}) }}"> <button type="button" class="btn btn-danger">Delete</button>
+                    </a>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block js %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        } );
+    </script>
+
+{% endblock%}

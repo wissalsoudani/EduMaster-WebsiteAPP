@@ -1,0 +1,81 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}TestHistoire{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+<section class="section">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Liste des Tests</h5>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">idTest</th>
+                        <th scope="col">Nom Histoire</th>
+                        <th scope="col">question1</th>
+                        <th scope="col">r11</th>
+                        <th scope="col">r12</th>
+                        <th scope="col">r13</th>
+                        <th scope="col">correctionq1</th>
+                        <th scope="col">question2</th>
+                        <th scope="col">r21</th>
+                        <th scope="col">r22</th>
+                        <th scope="col">r23</th>
+                        <th scope="col">correctionq2</th>
+                        <th scope="col">question3</th>
+                        <th scope="col">r31</th>
+                        <th scope="col">r32</th>
+                        <th scope="col">r33</th>
+                        <th scope="col">correctionq3</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in Testhistoires %}
+                        <tr>
+                            <th scope="row">{{ i.idTest }}</th>
+                            <th scope="row">{{ i.idHistoire.nomHistoire }}</th>
+                            <td>{{ i.question1 }}</td>
+                            <td>{{ i.r11 }}</td>
+                            <td>{{ i.r12 }}</td>
+                            <td>{{ i.r13 }}</td>
+                            <td>{{ i.correctionq1 }}</td>
+                            <td>{{ i.question2 }}</td>
+                            <td>{{ i.r21 }}</td>
+                            <td>{{ i.r22 }}</td>
+                            <td>{{ i.r23 }}</td>
+                            <td>{{ i.correctionq2 }}</td>
+                            <td>{{ i.question3 }}</td>
+                            <td>{{ i.r31 }}</td>
+                            <td>{{ i.r32 }}</td>
+                            <td>{{ i.r33 }}</td>
+                            <td>{{ i.correctionq3 }}</td>
+                            <td>
+                                <a href="{{ path('supprimerTestHistoire',{'idTest':i.idTest}) }}"> Supprimer </a>
+                            </td>
+                            <td>
+                                <a href="{{ path('modifierTestHistoire',{'idTest':i.idTest}) }}"> Modifier </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <!-- End Default Table Example -->
+            </div>
+        </div>
+    </div>
+</section>
+
+
+        {% endblock %}
+
+
+

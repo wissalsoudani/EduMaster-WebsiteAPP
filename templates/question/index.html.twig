@@ -1,0 +1,61 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}question{% endblock %}
+
+{% block body %}
+    <h1>Question index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdQuestion</th>
+                <th>Question</th>
+                <th>Matiere</th>
+                <th>R1</th>
+                <th>R2</th>
+                <th>R3</th>
+                <th>Solution</th>
+                <th>Difficulte</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for question in questions %}
+            <tr>
+                <td>{{ question.idQuestion }}</td>
+                <td>{{ question.question }}</td>
+                <td>{{ question.matiere }}</td>
+                <td>{{ question.r1 }}</td>
+                <td>{{ question.r2 }}</td>
+                <td>{{ question.r3 }}</td>
+                <td>{{ question.solution }}</td>
+                <td>{{ question.difficulte }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('question_show', {'idQuestion': question.idQuestion}) }}">show</a>
+                    <a class="btn btn-primary" href="{{ path('question_edit', {'idQuestion': question.idQuestion}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('question_new') }}">Create new</a>
+        <a class="btn btn-primary" href="{{ path('pdf_index') }}">Export PDF</a>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
