@@ -20,7 +20,7 @@ class Quizs
      * @ORM\Column(name="id_quizs", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-          * @Groups("posts:read")
+    * @Groups("posts:read")
 
      */
     private $idQuizs;

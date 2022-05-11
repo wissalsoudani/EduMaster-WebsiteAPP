@@ -9,9 +9,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\QuizRepo;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Groups;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 
 
 
@@ -34,6 +42,80 @@ class QuizsController extends AbstractController
             'quizs' => $quizs,
         ]);
     }
+
+
+/**
+     * @Route("/listQuizsJSON", name="listQuizsJSON", methods={"GET"})
+     */
+    public function listquizsJSON(NormalizerInterface $Normalizer , QuizRepo $qrepo) 
+    
+    {
+        $quizs= $qrepo->findAll();
+       $serializer= new Serializer([new ObjectNormalizer()]);
+       $formatted= $Normalizer->normalize($quizs, 'json',['groups'=>'posts:read']);
+       
+       
+       return new JsonResponse($formatted);
+    }
+
+/**
+     * @Route("/addQuizsJSON/new", name="addQuizsJSON")
+     */
+    public function addQuizsJSON(Request $request, NormalizerInterface $Normalizer)
+    {
+        $quizs = new Quizs();
+
+       $quizs->setImage($request->get('image'));
+       $quizs->setMatiere($request->get('matiere'));
+       $quizs->setDifficulte($request->get('difficulte'));
+       $quizs->setResultat($request->get('resultat'));
+
+            $em = $this->getDoctrine()->getManager();
+            
+            $em->persist($quizs);
+            $em->flush();
+            $formatted= $Normalizer->normalize($quizs, 'json',['groups'=>'post:read']);
+            return new JsonResponse($formatted);
+    }  
+    
+    
+    /**
+     * @Route("/updateQuizsJSON/{id_quizs}", name="updateQuizsJSON")
+     */
+    public function updateQuizsJSON(Request $request, NormalizerInterface $Normalizer,$id_quizs)
+    {
+        $quizs = $this->getDoctrine()->getRepository(Quizs::class)->find($id_quizs);
+
+      $quizs->setImage($request->get('image'));
+       $quizs->setMatiere($request->get('matiere'));
+       $quizs->setDifficulte($request->get('difficulte'));
+       $quizs->setResultat($request->get('resultat'));
+
+            $em = $this->getDoctrine()->getManager();
+            
+            $em->persist($quizs);
+            $em->flush();
+            $formatted= $Normalizer->normalize($quizs, 'json',['groups'=>'post:read']);
+            return new JsonResponse($formatted);
+
+    }
+
+/**
+     * @Route("/deleteQuizsJSON/{id_quizs}", name="deleteQuizsJSON")
+     */
+    public function deleteQuizsJSON(Request $request, NormalizerInterface $Normalizer,$id_quizs)
+    {
+        $quizs = $this->getDoctrine()->getRepository(Quizs::class)->find($id_quizs);
+
+            $em = $this->getDoctrine()->getManager();
+            
+            $em->remove($quizs);
+            $em->flush();
+            $formatted= $Normalizer->normalize($quizs, 'json',['groups'=>'post:read']);
+            return new JsonResponse("quiz a ete supprime avec succes".json_encode($formatted));;
+
+    }
+
 
     /**
      * @Route("/new", name="quizs_new", methods={"GET","POST"})
@@ -222,27 +304,10 @@ class QuizsController extends AbstractController
         $jsonc=json_encode($jsoncontentc);
        
         if(  $jsonc == "[]" ) { return new Response(null); }
-        else{ return new Response($jsonc); }
+        else{ return new Response($jsonc); } 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 
 
@@ -301,8 +366,13 @@ class QuizsController extends AbstractController
     }
 
 
+    
 
 
+    
+
+ 
+     
 
 
 

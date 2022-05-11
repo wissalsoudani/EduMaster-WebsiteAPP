@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Question
@@ -19,6 +20,8 @@ class Question
      * @ORM\Column(name="id_question", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
+
      */
     private $idQuestion;
 
@@ -27,6 +30,8 @@ class Question
      *
      * @ORM\Column(name="question", type="string", length=30, nullable=false)
     * @Assert\NotBlank(message="Question est obligatoire")
+     *@Groups("post:read")
+
      */
     private $question;
 
@@ -35,6 +40,8 @@ class Question
      *
      * @ORM\Column(name="matiere", type="string", length=30, nullable=false)
          * @Assert\NotBlank(message="Matiere est obligatoire")
+         * @Groups("post:read")
+
 
      */
     private $matiere;
@@ -44,6 +51,7 @@ class Question
      *
      * @ORM\Column(name="R1", type="string", length=30, nullable=false)
     * @Assert\NotBlank(message="Reponse 1 est obligatoire")
+     *@Groups("post:read")
 
      */
     private $r1;
@@ -53,6 +61,8 @@ class Question
      *
      * @ORM\Column(name="R2", type="string", length=30, nullable=false)
          * @Assert\NotBlank(message="Reponse 2 est obligatoire")
+         * @Groups("post:read")
+
 
      */
     private $r2;
@@ -62,6 +72,7 @@ class Question
      *
      * @ORM\Column(name="R3", type="string", length=30, nullable=false)
          * @Assert\NotBlank(message="Reponse 3 est obligatoire")
+        *@Groups("post:read")
 
      */
     private $r3;
@@ -71,6 +82,8 @@ class Question
      *
      * @ORM\Column(name="solution", type="string", length=30, nullable=false)
     * @Assert\NotBlank(message="Solution  est obligatoire")
+    *@Groups("post:read")
+
 
      */
     private $solution;
@@ -80,6 +93,7 @@ class Question
      *
      * @ORM\Column(name="difficulte", type="string", length=30, nullable=false)
          * @Assert\NotBlank(message="Difficulté est obligatoire")
+         * @Groups("post:read")
 
      */
     private $difficulte;
@@ -87,6 +101,8 @@ class Question
     /**
      *
      *   @ORM\Column(name="id_quizs",type="string", length=30, nullable=false)
+     * @Groups("post:read")
+
      */
     private $idQuizs;
 

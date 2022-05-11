@@ -58,8 +58,7 @@ class QuizRepo extends ServiceEntityRepository
         return $query->getResult();
     }
 
-
-
+  
 
     
 }

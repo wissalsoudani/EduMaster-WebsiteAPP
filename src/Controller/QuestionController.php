@@ -11,6 +11,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Repository\QuestionRepo;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Groups;
 
 /**
  * @Route("/question")
@@ -142,8 +146,11 @@ class QuestionController extends AbstractController
         $dompdf->stream("mypdf.pdf", [
             "Attachment" => false
         ]);
+
+        
     }
 
+    
 
 
 
